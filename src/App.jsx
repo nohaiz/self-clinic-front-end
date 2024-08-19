@@ -4,11 +4,19 @@ import { Route, Routes } from "react-router-dom";
 import { useState } from "react";
 
 // IMPORTED MODULES
+
+import NavBar from "./components/nav/NavBar";
+
+// SERVICES
+import authServices from "./components/services/authServices";
+
+// PUBLIC ROUTES
 import SignInFrom from "./components/auth/SignInForm";
 import SignUpFrom from "./components/auth/SignUpForm";
 import Landing from "./components/landing/Landing";
-import NavBar from "./components/nav/NavBar";
-import authServices from "./components/services/authServices";
+import AdminDetails from "./components/profiles/admin/AdminDetails";
+
+// PRIVATE ROUTES
 import DashBoard from "./components/dashboard/Dashboard";
 
 function App() {
@@ -26,6 +34,27 @@ function App() {
           // PRIVATE ROUTES
           <>
             <Route path="/" element={<DashBoard user={user} />} />
+
+            {user.type.hasOwnProperty(2000) ? (
+              <Route
+                path={`/users/admins/:id`}
+                element={<AdminDetails />}
+              ></Route>
+            ) : (
+              <></>
+            )}
+
+            {user.type.hasOwnProperty(3000) ? (
+              <Route path={`/users/patients/:id`} element={<></>}></Route>
+            ) : (
+              <></>
+            )}
+
+            {user.type.hasOwnProperty(5000) ? (
+              <Route path={`/users/doctors/:id`} element={<></>}></Route>
+            ) : (
+              <></>
+            )}
           </>
         ) : (
           // PUBLIC ROUTES
