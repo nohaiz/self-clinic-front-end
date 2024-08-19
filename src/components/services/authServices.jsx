@@ -29,6 +29,15 @@ const signup = async (formData) => {
     if (json.err) {
       throw new Error(json.err);
     }
+    if (json.token) {
+      window.localStorage.setItem("token", json.token);
+
+      const rawPayload = json.token.split(".")[1];
+      const jsonPayload = window.atob(rawPayload);
+
+      const user = JSON.parse(jsonPayload);
+      return user;
+    }
     return json;
   } catch (err) {
     console.log(err);
