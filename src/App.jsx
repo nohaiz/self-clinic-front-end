@@ -1,6 +1,6 @@
 import "./App.css";
 
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 // IMPORTED MODULES
@@ -9,22 +9,40 @@ import NavBar from "./components/nav/NavBar";
 
 // SERVICES
 import authServices from "./components/services/authServices";
+import adminServices from "./components/services/adminServices";
 
 // PUBLIC ROUTES
 import SignInFrom from "./components/auth/SignInForm";
 import SignUpFrom from "./components/auth/SignUpForm";
 import Landing from "./components/landing/Landing";
 import AdminDetails from "./components/profiles/admin/AdminDetails";
+import AdminCreateForm from "./components/profiles/admin/AdminCreateForm";
+import ManageUsers from "./components/profiles/admin/ManageUser";
 
 // PRIVATE ROUTES
 import DashBoard from "./components/dashboard/Dashboard";
 
 function App() {
   const [user, setUser] = useState(authServices.getUser());
+  const navigate = useNavigate();
 
   const handleSignout = () => {
     authServices.signout();
     setUser(null);
+  };
+
+  const handleDeleteUser = async (userType, id) => {
+    try {
+      if (userType === "admins") {
+        await adminServices.deleteAdmin(userType, id);
+        if ((user.type[2000] === id)) {
+          handleSignout();
+          navigate("/");
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <>
@@ -36,10 +54,29 @@ function App() {
             <Route path="/" element={<DashBoard user={user} />} />
 
             {user.type.hasOwnProperty(2000) ? (
-              <Route
-                path={`/users/admins/:id`}
-                element={<AdminDetails />}
-              ></Route>
+              <>
+                <Route
+                  path={`/users/admins/:id`}
+                  element={<AdminDetails handleDeleteUser={handleDeleteUser} />}
+                ></Route>
+                <Route
+                  path="/users/admins"
+                  element={<AdminCreateForm user={user}/>}
+                ></Route>
+                <Route
+                  path={`/users/admins/:id/edit`}
+                  element={<AdminCreateForm />}
+                ></Route>
+                <Route
+                  path="/users"
+                  element={
+                    <ManageUsers
+                      user={user}
+                      handleDeleteUser={handleDeleteUser}
+                    />
+                  }
+                ></Route>
+              </>
             ) : (
               <></>
             )}
