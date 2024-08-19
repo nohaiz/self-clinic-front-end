@@ -37,27 +37,21 @@ function App() {
 
             {user.type.hasOwnProperty(2000) ? (
               <Route
-                path={`/users/admins/${user.type[2000]}`}
-                element={<AdminDetails user={user} />}
+                path={`/users/admins/:id`}
+                element={<AdminDetails />}
               ></Route>
             ) : (
               <></>
             )}
 
             {user.type.hasOwnProperty(3000) ? (
-              <Route
-                path={`/users/profiles/${user.type[3000]}`}
-                element={<></>}
-              ></Route>
+              <Route path={`/users/patients/:id`} element={<></>}></Route>
             ) : (
               <></>
             )}
 
             {user.type.hasOwnProperty(5000) ? (
-              <Route
-                path={`/users/profiles/${user.type[5000]}`}
-                element={<></>}
-              ></Route>
+              <Route path={`/users/doctors/:id`} element={<></>}></Route>
             ) : (
               <></>
             )}
