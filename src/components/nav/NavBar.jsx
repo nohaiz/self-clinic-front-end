@@ -7,6 +7,8 @@ const NavBar = ({ user, handleSignout }) => {
       {user ? (
         // PRIVATE ROUTES
         <>
+          <Link to="/">Home</Link>
+
           {user.type.hasOwnProperty(2000) ? (
             <Link to={`/users/admins/${user.type[2000]}`}>Admin Profile</Link>
           ) : (
