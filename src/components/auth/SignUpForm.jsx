@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import authServices from "../services/authServices";
 
-const SignUpForm = () => {
+const SignUpForm = (prop) => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
