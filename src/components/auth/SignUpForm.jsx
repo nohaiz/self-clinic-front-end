@@ -79,7 +79,7 @@ const SignUpForm = () => {
     } catch (error) {
       console.log(error);
       setErrors({
-        general: "An unexpected error occurred. Please try again later.",
+        general: "User data entry invalid. Please try again.",
       });
     }
 
