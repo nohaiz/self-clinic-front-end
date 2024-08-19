@@ -24,7 +24,6 @@ import DashBoard from "./components/dashboard/Dashboard";
 
 function App() {
   const [user, setUser] = useState(authServices.getUser());
-  console.log(user)
   const navigate = useNavigate();
 
   const handleSignout = () => {
