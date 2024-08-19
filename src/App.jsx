@@ -18,7 +18,12 @@ import Landing from "./components/landing/Landing";
 import AdminDetails from "./components/profiles/admin/AdminDetails";
 import AdminCreateForm from "./components/profiles/admin/AdminCreateForm";
 import ManageUsers from "./components/profiles/admin/ManageUser";
-
+import PatientDetails from "./components/profiles/patient/PatientDetails";
+import UpdatePatientForm from "./components/profiles/patient/UpdatePatient";
+import DoctorDetails from "./components/profiles/doctor/DoctorDetails";
+import UpdateDoctorForm from "./components/profiles/doctor/UpdateDoctor";
+import patientServices from "./components/services/patientServices";
+import doctorServices from "./components/services/doctorServices";
 // PRIVATE ROUTES
 import DashBoard from "./components/dashboard/Dashboard";
 
@@ -35,7 +40,7 @@ function App() {
     try {
       if (userType === "admins") {
         await adminServices.deleteAdmin(userType, id);
-        if ((user.type[2000] === id)) {
+        if (user.type[2000] === id) {
           handleSignout();
           navigate("/");
         }
@@ -44,6 +49,35 @@ function App() {
       console.log(error);
     }
   };
+
+  const handleDeletePatient = async (userType, id) => {
+    try {
+      if (userType === "patients") {
+        await patientServices.deletePatient(userType, id);
+        if (user.type[3000] === id) {
+          handleSignout();
+          navigate("/");
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleDeleteDoctor = async (userType, id) => {
+    try {
+      if (userType === "doctors") {
+        await doctorServices.deleteDoctor(userType, id);
+        if (user.type[5000] === id) {
+          handleSignout();
+          navigate("/");
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <NavBar user={user} handleSignout={handleSignout} />
@@ -61,7 +95,7 @@ function App() {
                 ></Route>
                 <Route
                   path="/users/admins"
-                  element={<AdminCreateForm user={user}/>}
+                  element={<AdminCreateForm user={user} />}
                 ></Route>
                 <Route
                   path={`/users/admins/:id/edit`}
@@ -82,13 +116,35 @@ function App() {
             )}
 
             {user.type.hasOwnProperty(3000) ? (
-              <Route path={`/users/patients/:id`} element={<></>}></Route>
+              <>
+                <Route
+                  path={`/users/patients/:id`}
+                  element={
+                    <PatientDetails handleDeletePatient={handleDeletePatient} />
+                  }
+                />
+                <Route
+                  path={`/users/patients/:id/edit`}
+                  element={<UpdatePatientForm />}
+                />
+              </>
             ) : (
               <></>
             )}
 
             {user.type.hasOwnProperty(5000) ? (
-              <Route path={`/users/doctors/:id`} element={<></>}></Route>
+              <>
+                <Route
+                  path={`/users/doctors/:id`}
+                  element={
+                    <DoctorDetails handleDeleteDoctor={handleDeleteDoctor} />
+                  }
+                ></Route>
+                <Route
+                  path={`/users/doctors/:id/edit`}
+                  element={<UpdateDoctorForm />}
+                ></Route>
+              </>
             ) : (
               <></>
             )}
