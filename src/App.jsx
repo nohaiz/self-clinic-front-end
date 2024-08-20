@@ -119,7 +119,10 @@ function App() {
                 <Route
                   path="/users"
                   element={
-                    <ManageUsers user={user} handleDeleteUser={handleDeleteUser}/>
+                    <ManageUsers
+                      user={user}
+                      handleDeleteUser={handleDeleteUser}
+                    />
                   }
                 ></Route>
                 <Route
@@ -131,12 +134,16 @@ function App() {
               <></>
             )}
 
-            {user.type.hasOwnProperty(3000) || user.type.hasOwnProperty(2000)? (
+            {user.type.hasOwnProperty(3000) ||
+            user.type.hasOwnProperty(2000) ? (
               <>
                 <Route
                   path={`/users/patients/:id`}
                   element={
-                    <PatientDetails handleDeleteUser={handleDeleteUser} user={user} />
+                    <PatientDetails
+                      handleDeleteUser={handleDeleteUser}
+                      user={user}
+                    />
                   }
                 />
                 <Route
@@ -148,12 +155,16 @@ function App() {
               <></>
             )}
 
-            {user.type.hasOwnProperty(5000) || user.type.hasOwnProperty(2000) ? (
+            {user.type.hasOwnProperty(5000) ||
+            user.type.hasOwnProperty(2000) ? (
               <>
                 <Route
                   path={`/users/doctors/:id`}
                   element={
-                    <DoctorDetails handleDeleteUser={handleDeleteUser} user={user}/>
+                    <DoctorDetails
+                      handleDeleteUser={handleDeleteUser}
+                      user={user}
+                    />
                   }
                 ></Route>
                 <Route

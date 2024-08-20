@@ -1,6 +1,7 @@
 // Imports
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 // Services
 import doctorServices from "../../services/doctorServices";
@@ -18,6 +19,7 @@ const formatTimeTo12Hour = (time) => {
 
 const DoctorDetails = ({ handleDeleteUser, user }) => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [doctor, setDoctor] = useState("");
   const [userType, setUserType] = useState("doctors");
 
@@ -58,11 +60,18 @@ const DoctorDetails = ({ handleDeleteUser, user }) => {
         <button type="button">Edit</button>
       </Link>
 
-      {user.type.hasOwnProperty(2000) ? <></> : 
+      {user.type.hasOwnProperty(2000) ? (
+        <></>
+      ) : (
         <button
-        type="button" onClick={() => { handleDeleteUser(userType, id)}}>
-        Delete 
-        </button>}
+          type="button"
+          onClick={() => {
+            handleDeleteUser(userType, id);
+          }}
+        >
+          Delete
+        </button>
+      )}
     </>
   );
 };
