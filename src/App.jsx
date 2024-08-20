@@ -25,8 +25,12 @@ import UpdateDoctorForm from "./components/profiles/doctor/UpdateDoctor";
 import patientServices from "./components/services/patientServices";
 import doctorServices from "./components/services/doctorServices";
 // Offered Services
-import ManageService from "./components/offeredServices/ManageServices";
+import ManageServices from "./components/offeredServices/ManageServices";
 import ServiceForm from "./components/offeredServices/ServiceForm";
+// Appointments
+import ManageAppointments from "./components/appointments/ManageAppointments";
+import AppointmentForm from "./components/appointments/AppointmentForm";
+
 // PRIVATE ROUTES
 import DashBoard from "./components/dashboard/Dashboard";
 
@@ -163,7 +167,7 @@ function App() {
             ) : (
               <></>
             )}
-            <Route path="/services" element={<ManageService user={user} />} />
+            <Route path="/services" element={<ManageServices user={user} />} />
             {(user.type.hasOwnProperty(5000) ||
               user.type.hasOwnProperty(2000)) && (
               <Route path="/services/create" element={<ServiceForm user={user} />} />
@@ -171,6 +175,15 @@ function App() {
             {(user.type.hasOwnProperty(5000) ||
               user.type.hasOwnProperty(2000)) && (
               <Route path="/services/:id" element={<ServiceForm user={user} />} />
+            )}
+            <Route path="/appointments" element={<ManageAppointments user={user} />} />
+            {(user.type.hasOwnProperty(5000) ||
+              user.type.hasOwnProperty(2000)) && (
+              <Route path="/appointments/create" element={<AppointmentForm user={user} />} />
+            )}
+            {(user.type.hasOwnProperty(5000) ||
+              user.type.hasOwnProperty(2000)) && (
+              <Route path="/appointments/:id" element={<AppointmentForm user={user} />} />
             )}
           </>
         ) : (

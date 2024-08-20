@@ -1,32 +1,32 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import service from "../services/service";
+import appointmentService from "../services/appointmentServices";
 
-const ManageServices = ({ user }) => {
+const ManageAppointments = ({ user }) => {
   const [data, setData] = useState([]);
   const navigate = useNavigate();
 
-  const fetchOfferedServices = async () => {
+  const fetchAppointments = async () => {
     try {
-      const fetchedData = await service.indexAllServices();
-      setData(fetchedData.services);
+      const fetchedData = await appointmentService.indexAllAppointments();
+      setData(fetchedData.appointments);
     } catch (error) {
       console.log("Error fetching data: ", error);
     }
   };
 
   useEffect(() => {
-    fetchOfferedServices();
+    fetchAppointments();
   }, []);
 
   const handleDeleteService = async (id) => {
     try {
-      const choice=confirm("Are you sure you want to delete this service?");
+      const choice=confirm("Are you sure you want to delete this appointment?");
       if(!choice) return;
 
-      await service.deleteService(id);
-      fetchOfferedServices();
+      await appointmentService.deleteAppointment(id);
+      fetchAppointments();
     } catch (error) {
       console.log("Error deleting service: ", error);
     }
@@ -36,14 +36,14 @@ const ManageServices = ({ user }) => {
       <div>
         {data ? (
           <div>
-            {data.map((service, index) => (
+            {data.map((appointment, index) => (
               <div key={index}>
-                {service.name}{" "}
+                {appointment.startTime} - {appointment.endTime} Doctor {appointment.doctor.firstName} - Patient {appointment.patient.firstName}{"  "}
                 {(user.type.hasOwnProperty(2000) ||
                   user.type.hasOwnProperty(5000)) && (
                   <>
-                    <button to={()=>navigate(`/services/${service._id}`)}>Edit</button>
-                    <button onClick={() => handleDeleteService(service._id)}>
+                    <button onClick={()=>navigate(`/appointments/${appointment._id}`)}>Edit</button>
+                    <button onClick={() => handleDeleteService(appointment._id)}>
                       Delete
                     </button>{" "}
                   </>
@@ -55,11 +55,11 @@ const ManageServices = ({ user }) => {
           <p>No data available</p>
         )}
         {(user.type.hasOwnProperty(2000) || user.type.hasOwnProperty(5000)) && (
-          <Link to="/services/create">Create Service</Link>
+          <Link to="/appointments/create">Create Appointment</Link>
         )}
       </div>
     </div>
   );
 };
 
-export default ManageServices;
+export default ManageAppointments;
