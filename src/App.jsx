@@ -16,7 +16,7 @@ import SignInFrom from "./components/auth/SignInForm";
 import SignUpFrom from "./components/auth/SignUpForm";
 import Landing from "./components/landing/Landing";
 import AdminDetails from "./components/profiles/admin/AdminDetails";
-import AdminCreateForm from "./components/profiles/admin/AdminCreateForm";
+import AdminForm from "./components/profiles/admin/AdminForm";
 import ManageUsers from "./components/profiles/admin/ManageUser";
 import PatientDetails from "./components/profiles/patient/PatientDetails";
 import UpdatePatientForm from "./components/profiles/patient/UpdatePatient";
@@ -110,19 +110,16 @@ function App() {
                 ></Route>
                 <Route
                   path="/users/admins"
-                  element={<AdminCreateForm user={user} />}
+                  element={<AdminForm user={user} />}
                 ></Route>
                 <Route
                   path={`/users/admins/:id/edit`}
-                  element={<AdminCreateForm />}
+                  element={<AdminForm />}
                 ></Route>
                 <Route
                   path="/users"
                   element={
-                    <ManageUsers
-                      user={user}
-                      handleDeleteUser={handleDeleteUser}
-                    />
+                    <ManageUsers user={user} handleDeleteUser={handleDeleteUser}/>
                   }
                 ></Route>
                 <Route
@@ -134,12 +131,12 @@ function App() {
               <></>
             )}
 
-            {user.type.hasOwnProperty(3000) ? (
+            {user.type.hasOwnProperty(3000) || user.type.hasOwnProperty(2000)? (
               <>
                 <Route
                   path={`/users/patients/:id`}
                   element={
-                    <PatientDetails handleDeleteUser={handleDeleteUser} />
+                    <PatientDetails handleDeleteUser={handleDeleteUser} user={user} />
                   }
                 />
                 <Route
@@ -151,12 +148,12 @@ function App() {
               <></>
             )}
 
-            {user.type.hasOwnProperty(5000) ? (
+            {user.type.hasOwnProperty(5000) || user.type.hasOwnProperty(2000) ? (
               <>
                 <Route
                   path={`/users/doctors/:id`}
                   element={
-                    <DoctorDetails handleDeleteUser={handleDeleteUser} />
+                    <DoctorDetails handleDeleteUser={handleDeleteUser} user={user}/>
                   }
                 ></Route>
                 <Route

@@ -41,16 +41,8 @@ const AdminDetails = ({ handleDeleteUser }) => {
         Delete
       </button>
 
-      <Link to="/users/admins">
-        <button type="button">Create</button>
-      </Link>
-
       <Link to="/users">
         <button type="button">Manage Users</button>
-      </Link>
-      {/* remove this button before merging */}
-      <Link to="/users/doctors">
-        <button type="button">Create Doctor</button>
       </Link>
     </>
   );

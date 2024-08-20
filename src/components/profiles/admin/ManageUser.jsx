@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 import adminServices from "../../services/adminServices";
 
@@ -33,30 +34,31 @@ const ManageUsers = ({ user, handleDeleteUser }) => {
             {data.map((users, index) => (
               <div key={index}>
                 <p>
-                  {user.type[2000] === users._id ? (
-                    <>
-                      <span>List of users:</span>
-                    </>
-                  ) : (
-                    <>
-                      {`${users.firstName} ${users.lastName}`}
-                      <button
-                        type="button"
-                        onClick={async () => {
+                  {user.type[2000] === users._id ? (<></>) : (
+                    <div>
+                     {userType === "doctors" ? (
+                      <Link to={`/users/doctors/${users._id}`}>
+                        {`${users.firstName} ${users.lastName}`}
+                      </Link>
+                    ) : userType === "patients" ? (
+                      <Link to={`/users/patients/${users._id}`}>
+                        {`${users.firstName} ${users.lastName}`}
+                      </Link>
+                    ) : (
+                      `${users.firstName} ${users.lastName}`
+                    )}
+                      <button type="button" onClick={async () => {
                           try {
-                            await handleDeleteUser(userType, users._id); // Await the deletion
-                            await fetchUser(); // Fetch updated user list after deletion
+                            await handleDeleteUser(userType, users._id);
+                            await fetchUser();
                           } catch (error) {
                             console.error(
                               "Error during delete and fetch: ",
                               error
-                            ); // Handle errors
+                            );
                           }
-                        }}
-                      >
-                        Delete
-                      </button>
-                    </>
+                        }}> Delete </button>
+                    </div>
                   )}
                 </p>
               </div>
@@ -64,6 +66,19 @@ const ManageUsers = ({ user, handleDeleteUser }) => {
           </div>
         ) : (
           <p>No data available</p>
+        )}
+        {userType === "admins" || userType === "doctors" ? (
+          userType === "admins" ? (
+            <Link to="/users/admins">
+              <button type="button">Create</button>
+            </Link>
+          ) : (
+            <Link to="/users/doctors">
+              <button type="button">Create</button>
+            </Link>
+          )
+        ) : (
+          <></>
         )}
       </div>
     </div>

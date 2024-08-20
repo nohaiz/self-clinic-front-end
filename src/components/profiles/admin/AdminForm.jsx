@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import adminServices from "../../services/adminServices";
 
-const AdminSignUpForm = ({ user }) => {
+const AdminForm = ({ user }) => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -81,7 +81,7 @@ const AdminSignUpForm = ({ user }) => {
         if (response.error) {
           setErrors({ general: "User data entry invalid. Please try again." });
         } else {
-          navigate("/");
+          navigate(`/users/admins/${id}`);
         }
       } catch (error) {
         console.log(error);
@@ -130,7 +130,7 @@ const AdminSignUpForm = ({ user }) => {
 
   return (
     <>
-      <h1>Admin Sign Up</h1>
+      <h1>{id ? "Update Administrator Profile" : "Administrator Registration"}</h1>
       <form onSubmit={handleSubmit}>
         {errors.general && <p>{errors.general}</p>}
 
@@ -258,13 +258,15 @@ const AdminSignUpForm = ({ user }) => {
           </>
         )}
 
-        <button type="submit">Sign Up</button>
+        <button type="submit">{id ? `Confirm` : 'Sign up' }</button>
       </form>
-      <button type="button" onClick={() => navigate("/")}>
-        Back
-      </button>
+      {id ? 
+      <button type="button" onClick={() =>navigate(`/users/admins/${id}`)}> Back</button>
+      :
+      <button type="button" onClick={() =>navigate('/users')}> Back</button>
+      }
     </>
   );
 };
 
-export default AdminSignUpForm;
+export default AdminForm;
