@@ -1,40 +1,22 @@
-import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import doctorServices from "../../services/doctorServices";
 
-const UpdateDoctorForm = () => {
-  const { id } = useParams();
+const CreateDoctorForm = () => {
   const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
-    CPR: 0,
+    CPR: "",
     contactNumber: "",
     specialization: "",
+    gender: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
     availability: [{ day: "", startTime: "", endTime: "" }],
   });
-
-  useEffect(() => {
-    const getDoctor = async () => {
-      try {
-        const doctorData = await doctorServices.fetchDoctor(id);
-
-        setFormData({
-          firstName: doctorData.firstName,
-          lastName: doctorData.lastName,
-          CPR: doctorData.CPR,
-          contactNumber: doctorData.contactNumber,
-          specialization: doctorData.specialization,
-          availability: doctorData.availability || [
-            { day: "", startTime: "", endTime: "" },
-          ],
-        });
-      } catch (error) {
-        console.error("Error fetching doctor data:", error);
-      }
-    };
-    getDoctor();
-  }, [id]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -63,6 +45,7 @@ const UpdateDoctorForm = () => {
       ],
     }));
   };
+
   const removeAvailabilitySlot = (index) => {
     setFormData((prevData) => ({
       ...prevData,
@@ -73,14 +56,39 @@ const UpdateDoctorForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await doctorServices.updateDoctor(id, formData);
-      navigate(`/users/doctors/${id}`);
+      if (formData.password !== formData.confirmPassword) {
+        throw new Error("Passwords do not match");
+      }
+      await doctorServices.createDoctor(formData);
+      navigate("/users");
     } catch (error) {
-      console.error("Error updating doctor data:", error);
+      console.error("Error creating doctor:", error);
     }
   };
+
   return (
     <form onSubmit={handleSubmit}>
+      <label htmlFor="email">Email</label>
+      <input
+        type="email"
+        name="email"
+        value={formData.email}
+        onChange={handleChange}
+      />
+      <label htmlFor="password">Password</label>
+      <input
+        type="password"
+        name="password"
+        value={formData.password}
+        onChange={handleChange}
+      />
+      <label htmlFor="confirmPassword">Confirm Password</label>
+      <input
+        type="password"
+        name="confirmPassword"
+        value={formData.confirmPassword}
+        onChange={handleChange}
+      />
       <label htmlFor="firstName">First Name</label>
       <input
         type="text"
@@ -121,6 +129,19 @@ const UpdateDoctorForm = () => {
         onChange={handleChange}
       />
 
+      <label htmlFor="gender">Gender:</label>
+      <select
+        name="gender"
+        id="gender"
+        value={formData.gender}
+        onChange={handleChange}
+      >
+        <option value="">Select Gender</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other</option>
+      </select>
+
       <p>Availability</p>
       {formData.availability.map((slot, index) => (
         <div key={index}>
@@ -160,9 +181,9 @@ const UpdateDoctorForm = () => {
         Add Availability Slot
       </button>
 
-      <button type="submit">Update</button>
+      <button type="submit">Create</button>
     </form>
   );
 };
 
-export default UpdateDoctorForm;
+export default CreateDoctorForm;

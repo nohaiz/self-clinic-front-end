@@ -14,7 +14,13 @@ const PatientDetails = ({ handleDeleteUser, user }) => {
     const fetchPatient = async () => {
       try {
         const patientData = await patientServices.fetchPatient(id);
-        setPatient(patientData);
+        const formattedDOB = patientData.DOB
+          ? new Date(patientData.DOB).toISOString().split("T")[0]
+          : "Not available";
+        setPatient({
+          ...patientData,
+          DOB: formattedDOB,
+        });
       } catch (error) {
         console.error("Error fetching patient data:", error);
       }
@@ -29,6 +35,7 @@ const PatientDetails = ({ handleDeleteUser, user }) => {
       </p>
       <p>CPR: {patient.CPR}</p>
       <p>Contact Number: {patient.contactNumber}</p>
+      <p>Date of Birth: {patient.DOB}</p>
       <Link to={`/users/patients/${id}/edit`}>
         <button type="button">Edit</button>
       </Link>
