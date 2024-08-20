@@ -26,6 +26,9 @@ const NavBar = ({ user, handleSignout }) => {
           ) : (
             <></>
           )}
+          <Link to={`/services`}>Services</Link>
+          <Link to={`/appointments`}>Appointments</Link>
+          
           <Link onClick={handleSignout} to="/">
             Sign Out
           </Link>
@@ -43,3 +46,5 @@ const NavBar = ({ user, handleSignout }) => {
 };
 
 export default NavBar;
+
+

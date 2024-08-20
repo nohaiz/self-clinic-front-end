@@ -24,6 +24,9 @@ import DoctorDetails from "./components/profiles/doctor/DoctorDetails";
 import UpdateDoctorForm from "./components/profiles/doctor/UpdateDoctor";
 import patientServices from "./components/services/patientServices";
 import doctorServices from "./components/services/doctorServices";
+// Offered Services
+import ManageService from "./components/offeredServices/ManageServices";
+import ServiceForm from "./components/offeredServices/ServiceForm";
 // PRIVATE ROUTES
 import DashBoard from "./components/dashboard/Dashboard";
 
@@ -159,6 +162,15 @@ function App() {
               </>
             ) : (
               <></>
+            )}
+            <Route path="/services" element={<ManageService user={user} />} />
+            {(user.type.hasOwnProperty(5000) ||
+              user.type.hasOwnProperty(2000)) && (
+              <Route path="/services/create" element={<ServiceForm user={user} />} />
+            )}
+            {(user.type.hasOwnProperty(5000) ||
+              user.type.hasOwnProperty(2000)) && (
+              <Route path="/services/:id" element={<ServiceForm user={user} />} />
             )}
           </>
         ) : (
