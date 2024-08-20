@@ -5,7 +5,7 @@ import { Link, useParams } from "react-router-dom";
 // Services
 import patientServices from "../../services/patientServices";
 
-const PatientDetails = ({ handleDeleteUser }) => {
+const PatientDetails = ({ handleDeleteUser, user }) => {
   const { id } = useParams();
   const [patient, setPatient] = useState("");
   const [userType, setUserType] = useState("patients");
@@ -32,15 +32,19 @@ const PatientDetails = ({ handleDeleteUser }) => {
       <Link to={`/users/patients/${id}/edit`}>
         <button type="button">Edit</button>
       </Link>
-      <button
+
+      {user.type.hasOwnProperty(2000) ? <></> :
+        <>
+        <button
         type="button"
         onClick={() => {
           handleDeleteUser(userType, id);
         }}
-      >
-        Delete
-      </button>
+        >Delete</button>
+        </>
+      }
     </>
+      
   );
 };
 
