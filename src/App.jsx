@@ -26,6 +26,7 @@ import patientServices from "./components/services/patientServices";
 import doctorServices from "./components/services/doctorServices";
 // PRIVATE ROUTES
 import DashBoard from "./components/dashboard/Dashboard";
+import CreateDoctorForm from "./components/profiles/doctor/CreateDoctor";
 
 function App() {
   const [user, setUser] = useState(authServices.getUser());
@@ -123,6 +124,10 @@ function App() {
                       handleDeleteUser={handleDeleteUser}
                     />
                   }
+                ></Route>
+                <Route
+                  path="/users/doctors"
+                  element={<CreateDoctorForm />}
                 ></Route>
               </>
             ) : (
