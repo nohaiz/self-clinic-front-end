@@ -14,6 +14,9 @@ const UpdatePatientForm = () => {
     contactNumber: "",
     DOB: "",
   });
+
+  const genderOptions = ["male", "female"];
+
   useEffect(() => {
     const getPatient = async () => {
       try {
@@ -77,6 +80,15 @@ const UpdatePatientForm = () => {
         value={formData.DOB}
         onChange={handleChange}
       />
+      <label htmlFor="gender">Gender</label>
+      <select name="gender" value={formData.gender} onChange={handleChange}>
+        <option value="">Select Gender</option>
+        {genderOptions.map((gender) => (
+          <option key={gender} value={gender}>
+            {gender}
+          </option>
+        ))}
+      </select>
       <button type="submit">Update</button>
     </form>
   );

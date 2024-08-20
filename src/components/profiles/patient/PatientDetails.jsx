@@ -5,10 +5,10 @@ import { Link, useParams } from "react-router-dom";
 // Services
 import patientServices from "../../services/patientServices";
 
-const PatientDetails = ({ handleDeletePatient }) => {
+const PatientDetails = ({ handleDeleteUser }) => {
   const { id } = useParams();
   const [patient, setPatient] = useState("");
-  // const [userType, setUserType] = useState("patients");
+  const [userType, setUserType] = useState("patients");
 
   useEffect(() => {
     const fetchPatient = async () => {
@@ -35,7 +35,7 @@ const PatientDetails = ({ handleDeletePatient }) => {
       <button
         type="button"
         onClick={() => {
-          handleDeletePatient("patients", id);
+          handleDeleteUser(userType, id);
         }}
       >
         Delete

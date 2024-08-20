@@ -45,13 +45,6 @@ function App() {
           navigate("/");
         }
       }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleDeletePatient = async (userType, id) => {
-    try {
       if (userType === "patients") {
         await patientServices.deletePatient(userType, id);
         if (user.type[3000] === id) {
@@ -59,13 +52,6 @@ function App() {
           navigate("/");
         }
       }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleDeleteDoctor = async (userType, id) => {
-    try {
       if (userType === "doctors") {
         await doctorServices.deleteDoctor(userType, id);
         if (user.type[5000] === id) {
@@ -77,6 +63,34 @@ function App() {
       console.log(error);
     }
   };
+
+  // const handleDeletePatient = async (userType, id) => {
+  //   try {
+  //     if (userType === "patients") {
+  //       await patientServices.deletePatient(userType, id);
+  //       if (user.type[3000] === id) {
+  //         handleSignout();
+  //         navigate("/");
+  //       }
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  // const handleDeleteDoctor = async (userType, id) => {
+  //   try {
+  //     if (userType === "doctors") {
+  //       await doctorServices.deleteDoctor(userType, id);
+  //       if (user.type[5000] === id) {
+  //         handleSignout();
+  //         navigate("/");
+  //       }
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <>
@@ -120,7 +134,7 @@ function App() {
                 <Route
                   path={`/users/patients/:id`}
                   element={
-                    <PatientDetails handleDeletePatient={handleDeletePatient} />
+                    <PatientDetails handleDeleteUser={handleDeleteUser} />
                   }
                 />
                 <Route
@@ -137,7 +151,7 @@ function App() {
                 <Route
                   path={`/users/doctors/:id`}
                   element={
-                    <DoctorDetails handleDeleteDoctor={handleDeleteDoctor} />
+                    <DoctorDetails handleDeleteUser={handleDeleteUser} />
                   }
                 ></Route>
                 <Route
