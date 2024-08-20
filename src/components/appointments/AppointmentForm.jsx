@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-
 import offeredServices from "../services/service";
 import appointmentServices from "../services/appointmentServices";
 import patientServices from "../services/patientServices";
@@ -26,7 +25,13 @@ const AppointmentForm = ({ user }) => {
   const fetchAppointmentData = async () => {
     if (id) {
       const data = await appointmentServices.fetchAppointment(id);
-      setFormData({...data,date:data.date.split("T")[0],patient:data.patient._id,doctor:data.doctor._id,service:data.service._id});
+      setFormData({
+        ...data,
+        date: data.date.split("T")[0],
+        patient: data.patient._id,
+        doctor: data.doctor._id,
+        service: data.service._id,
+      });
     }
   };
   const fetchServices = async () => {
@@ -42,8 +47,6 @@ const AppointmentForm = ({ user }) => {
     if (data) setPatients(data);
   };
 
-  console.log(services);
-
   useEffect(() => {
     fetchServices();
     fetchDoctors();
@@ -55,10 +58,42 @@ const AppointmentForm = ({ user }) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-
+  const validateForm = () => {
+    const errors = {};
+    const {
+      date,
+      startTime,
+      endTime,
+      service,
+      doctor,
+      patient,
+      status,
+      notes,
+    } = formData;
+    console.log(date);
+    if (!date) {
+      errors.date = "Date is required.";
+    }
+    if (!startTime) errors.startTime = "Start Time is required.";
+    if (!endTime) {
+      errors.endTime = "Date is required.";
+    } else if (startTime && endTime && startTime > endTime) {
+      errors.startTime = "Start time cannot be greater than end time.";
+    }
+    if (!service) errors.service = "Service is required.";
+    if (!doctor) errors.doctor = "Doctor is required.";
+    if (!patient) errors.patient = "Patient is required.";
+    if (!status) errors.status = "Status is required.";
+    return errors;
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const validationErrors = validateForm();
 
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
     if (id) {
       try {
         setErrors({});
@@ -163,10 +198,14 @@ const AppointmentForm = ({ user }) => {
             value={service}
             onChange={handleChange}
           >
-            <option disabled selected value="">Select Service</option>
+            <option  value="">
+              Select Service
+            </option>
             {services.length > 0 &&
               services.map((service) => (
-                <option key={service._id} value={service._id}>{service.name}</option>
+                <option key={service._id} value={service._id}>
+                  {service.name}
+                </option>
               ))}
           </select>
           {errors.service && <p className="error">{errors.service}</p>}
@@ -178,9 +217,13 @@ const AppointmentForm = ({ user }) => {
             value={doctor}
             onChange={handleChange}
           >
-            <option  value="">Select Doctor</option>
+            <option value="">Select Doctor</option>
             {doctors.length > 0 &&
-              doctors.map((doc) => <option key={doc._id} value={doc._id}>{doc.firstName} {doc.lastName}</option>)}
+              doctors.map((doc) => (
+                <option key={doc._id} value={doc._id}>
+                  {doc.firstName} {doc.lastName}
+                </option>
+              ))}
           </select>
           {errors.doctor && <p className="error">{errors.doctor}</p>}
 
@@ -192,10 +235,12 @@ const AppointmentForm = ({ user }) => {
             value={patient}
             onChange={handleChange}
           >
-            <option  value="">Select Patient</option>
+            <option value="">Select Patient</option>
             {patients.length > 0 &&
               patients.map((patient) => (
-                <option key={patient._id} value={patient._id}>{patient.firstName} {patient.lastName}</option>
+                <option key={patient._id} value={patient._id}>
+                  {patient.firstName} {patient.lastName}
+                </option>
               ))}
           </select>
           {errors.patient && <p className="error">{errors.patient}</p>}
@@ -208,6 +253,9 @@ const AppointmentForm = ({ user }) => {
             value={status}
             onChange={handleChange}
           >
+            <option value="">
+              Select Status
+            </option>
             <option value="pending">Pending</option>
             <option value="camcelled">Cancelled</option>
             <option value="completed">Completed</option>

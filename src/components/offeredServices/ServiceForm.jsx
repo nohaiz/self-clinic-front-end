@@ -27,14 +27,27 @@ const ServiceForm = ({ user }) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+  const validateForm = () => {
+    const errors = {};
+    const { name,  category } = formData;
 
+    if (!name || !/^[A-Za-z]+$/.test(name))
+      errors.name = "Name is required and must contain only letters.";
+    if (!category) errors.category = "Category is required.";
+    return errors;
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+    const validationErrors = validateForm();
+
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
     if (id) {
       try {
         setErrors({});
-        const response = await service.updateService( id,formData,);
+        const response = await service.updateService(id, formData);
         if (response.error) {
           setErrors({
             general: "Service data entry invalid. Please try again.",

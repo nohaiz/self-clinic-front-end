@@ -33,6 +33,7 @@ const ManageServices = ({ user }) => {
   };
   return (
     <div>
+      <h4>Services</h4>
       <div>
         {data ? (
           <div>
@@ -42,7 +43,7 @@ const ManageServices = ({ user }) => {
                 {(user.type.hasOwnProperty(2000) ||
                   user.type.hasOwnProperty(5000)) && (
                   <>
-                    <button to={()=>navigate(`/services/${service._id}`)}>Edit</button>
+                    <button onClick={()=>navigate(`/services/${service._id}`)}>Edit</button>
                     <button onClick={() => handleDeleteService(service._id)}>
                       Delete
                     </button>{" "}

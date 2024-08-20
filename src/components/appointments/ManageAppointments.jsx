@@ -33,12 +33,13 @@ const ManageAppointments = ({ user }) => {
   };
   return (
     <div>
+      <h4>Appointments</h4>
       <div>
         {data ? (
           <div>
             {data.map((appointment, index) => (
               <div key={index}>
-                {appointment.startTime} - {appointment.endTime} Doctor {appointment.doctor.firstName} - Patient {appointment.patient.firstName}{"  "}
+                {appointment.date.split("T")[0]} - {appointment.startTime} - {appointment.endTime} Doctor {appointment.doctor.firstName} - Patient {appointment.patient.firstName}{"  "}
                 {(user.type.hasOwnProperty(2000) ||
                   user.type.hasOwnProperty(5000)) && (
                   <>
