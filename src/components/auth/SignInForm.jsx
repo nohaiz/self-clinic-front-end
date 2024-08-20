@@ -1,7 +1,6 @@
+import "../auth/auth.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-import DashBoard from "../dashboard/Dashboard";
 import authServices from "../services/authServices";
 
 const SignInForm = (prop) => {
@@ -62,37 +61,62 @@ const SignInForm = (prop) => {
   const { email, password } = formData;
 
   return (
-    <>
-      <h1>Sign In</h1>
-      <form onSubmit={handleSubmit}>
-        {errors.general && <p>{errors.general}</p>}
+    <div className="hero is-fullheight">
+      <div className="hero-body">
+        <div className="container">
+          <div className="columns is-centered is-vcentered">
+            <div className="column is-8-tablet is-6-desktop is-5-widescreen">
+              <div className="box" style={{ minHeight: '400px' }}>
+                <h1 className="title has-text-centered">Sign In</h1>
+                <form onSubmit={handleSubmit}>
+                  {errors.general && <div className="notification is-danger">{errors.general}</div>}
 
-        <label htmlFor="email">Email</label>
-        <input
-          type="text"
-          name="email"
-          id="email"
-          value={email}
-          onChange={handleChange}
-        />
-        {errors.email && <p className="error">{errors.email}</p>}
+                  <div className="field">
+                    <label className="label" htmlFor="email">Email</label>
+                    <div className="control">
+                      <input
+                        type="email"
+                        name="email"
+                        id="email"
+                        className={`input ${errors.email ? "is-danger" : ""}`}
+                        placeholder="e.g. alexsmith@gmail.com"
+                        value={email}
+                        onChange={handleChange}
+                      />
+                    </div>
+                    {errors.email && <p className="help is-danger">{errors.email}</p>}
+                  </div>
 
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          value={password}
-          onChange={handleChange}
-        />
-        {errors.password && <p className="error">{errors.password}</p>}
+                  <div className="field">
+                    <label className="label" htmlFor="password">Password</label>
+                    <div className="control">
+                      <input
+                        type="password"
+                        name="password"
+                        id="password"
+                        className={`input ${errors.password ? "is-danger" : ""}`}
+                        placeholder="********"
+                        value={password}
+                        onChange={handleChange}
+                      />
+                    </div>
+                    {errors.password && <p className="help is-danger">{errors.password}</p>}
+                  </div>
 
-        <button type="submit">Sign In</button>
-      </form>
-      <button type="button" onClick={() => navigate("/")}>
-        Back
-      </button>
-    </>
+                  <div className="field">
+                    <button type="submit" className="button is-primary is-fullwidth">Sign In</button>
+                  </div>
+
+                  <div className="field">
+                    <button type="button" className="button is-link is-fullwidth" onClick={() => navigate("/")}>Back</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

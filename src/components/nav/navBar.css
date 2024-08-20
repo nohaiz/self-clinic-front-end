@@ -1,0 +1,21 @@
+.navbar.is-link  {
+  background-color: #ACB0BD;
+}
+.navbar-menu {
+  background-color: #416165;
+}
+.navbar-end,.navbar-item {
+  font-weight: 400;
+  font-size: large;
+}
+.navbar-link, a.navbar-item:hover{
+  background-color: #2E6171;
+}
+.navbar-link, a.navbar-item:focus{
+  background-color: #2E6171;
+}
+.box .title {
+  font-weight: 900;
+  font-size: 2.4rem;
+}
+
