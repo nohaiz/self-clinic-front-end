@@ -89,15 +89,6 @@ const AdminSignUpForm = ({ user }) => {
           general: "User data entry invalid. Please try again.",
         });
       }
-      setFormData({
-        email: "",
-        password: "",
-        confirmPassword: "",
-        firstName: "",
-        lastName: "",
-        CPR: "",
-        contactNumber: "",
-      });
     } else {
       try {
         setErrors({});
@@ -115,16 +106,16 @@ const AdminSignUpForm = ({ user }) => {
           general: "User data entry invalid. Please try again.",
         });
       }
-      setFormData({
-        email: "",
-        password: "",
-        confirmPassword: "",
-        firstName: "",
-        lastName: "",
-        CPR: "",
-        contactNumber: "",
-      });
     }
+    setFormData({
+      email: "",
+      password: "",
+      confirmPassword: "",
+      firstName: "",
+      lastName: "",
+      CPR: "",
+      contactNumber: "",
+    });
   };
 
   const {
