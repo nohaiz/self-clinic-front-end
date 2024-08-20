@@ -41,10 +41,6 @@ const AdminDetails = ({ handleDeleteUser }) => {
         Delete
       </button>
 
-      <Link to="/users/admins">
-        <button type="button">Create</button>
-      </Link>
-
       <Link to="/users">
         <button type="button">Manage Users</button>
       </Link>
