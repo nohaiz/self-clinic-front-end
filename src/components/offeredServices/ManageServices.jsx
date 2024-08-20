@@ -37,9 +37,8 @@ const ManageUsers = ({ user }) => {
           <div>
             {data.map((service, index) => (
               <div key={index}>
-                {service.name}{" "}
-                {(user.type.hasOwnProperty(2000) ||
-                  user.type.hasOwnProperty(5000)) && (
+                {service.name}
+                {user.type.hasOwnProperty(2000) && (
                   <>
                     <Link to={`/services/${service._id}`}>Edit</Link>
                     <button onClick={() => handleDeleteService(service._id)}>
