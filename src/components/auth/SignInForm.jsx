@@ -61,7 +61,7 @@ const SignInForm = (prop) => {
   const { email, password } = formData;
 
   return (
-    <div className="hero is-fullheight">
+    <div className="hero is-small">
       <div className="hero-body">
         <div className="container">
           <div className="columns is-centered is-vcentered">
@@ -79,7 +79,7 @@ const SignInForm = (prop) => {
                         name="email"
                         id="email"
                         className={`input ${errors.email ? "is-danger" : ""}`}
-                        placeholder="e.g. alexsmith@gmail.com"
+                        placeholder="e.g. example@gmail.com"
                         value={email}
                         onChange={handleChange}
                       />
@@ -104,7 +104,7 @@ const SignInForm = (prop) => {
                   </div>
 
                   <div className="field">
-                    <button type="submit" className="button is-primary is-fullwidth">Sign In</button>
+                    <button type="submit" className="button is-fullwidth is-white">Sign In</button>
                   </div>
 
                   <div className="field">

@@ -3,13 +3,12 @@ import { Link } from "react-router-dom";
 
 const NavBar = ({ user, handleSignout }) => {
   return (
-    <nav className="navbar is-link">
+    <nav className="navbar is-link is-fixed-top">
       <div className="navbar-menu">
         <div className="navbar-start">
-          <Link className="navbar-item" to="/">
-            Home
+          <Link className="navbar-item custom-logo" to="/">
+            Self Clinic
           </Link>
-
           {user ? (
             <>
               {user.type.hasOwnProperty(2000) && (
@@ -40,12 +39,14 @@ const NavBar = ({ user, handleSignout }) => {
         <div className="navbar-end">
           {!user ? (
             <>
+            <div className="custom-sign-in-sign-out">
               <Link className="navbar-item" to="/users/sign-in">
                 Sign In
               </Link>
               <Link className="navbar-item" to="/users/sign-up">
                 Sign Up
               </Link>
+              </div>
             </>
           ) : (
             <a className="navbar-item" onClick={handleSignout} href="/">
