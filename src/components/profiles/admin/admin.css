@@ -12,3 +12,16 @@ p.title {
 .container .title:not(:last-child) {
   margin-bottom: 30px;
 }
+.full-height-center {
+  display: flex;
+  justify-content: center; 
+  align-items: center;     
+  min-height: 100vh;       
+}
+.box {
+  background-color: #ffffff; 
+  padding: 2rem;             
+  border-radius: 0.5rem;     
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
