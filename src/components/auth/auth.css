@@ -1,0 +1,13 @@
+.container .box {
+  margin-top: 20%;
+  background-color: #28323F;
+}
+
+.notification.is-danger{
+  padding: 10px;
+}
+#DOB {
+  display: flex;
+  justify-content: space-between;
+  text-wrap: wrap;
+}
