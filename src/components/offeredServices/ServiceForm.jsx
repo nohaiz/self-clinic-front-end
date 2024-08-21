@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import service from "../services/service";
+import "./services.css";
 
 const ServiceForm = ({ user }) => {
   const { id } = useParams();
@@ -29,7 +30,7 @@ const ServiceForm = ({ user }) => {
   };
   const validateForm = () => {
     const errors = {};
-    const { name,  category } = formData;
+    const { name, category } = formData;
 
     if (!name || !/^[A-Za-z]+$/.test(name))
       errors.name = "Name is required and must contain only letters.";
@@ -97,49 +98,82 @@ const ServiceForm = ({ user }) => {
 
   return (
     <>
-      <h1>{id ? "Update Service " : "Create Service"}</h1>
-      <form onSubmit={handleSubmit}>
-        {errors.general && <p>{errors.general}</p>}
+      <div className="custom-form">
+        <div className="container ">
+          <form
+            className="box has-background-white  column is-three-fifths is-offset-one-fifth"
+            onSubmit={handleSubmit}
+          >
+            <p className="title is-2 is-spaced">
+              {id ? "Update Service " : "Create Service"}
+            </p>
+            {errors.general && (
+              <div className="notification is-danger">{errors.general}</div>
+            )}
 
-        <>
-          <label htmlFor="name">Name</label>
-          <input
-            type="text"
-            name="name"
-            id="name"
-            value={name}
-            onChange={handleChange}
-          />
-          {errors.name && <p className="error">{errors.name}</p>}
+            <>
+              <div className="field">
+                <label className="label" htmlFor="name">
+                  Name
+                </label>
+                <div className="control">
+                  <input
+                    className="input"
+                    type="text"
+                    name="name"
+                    id="name"
+                    value={name}
+                    onChange={handleChange}
+                  />
+                </div>
+                {errors.name && <div className="help is-danger">{errors.name}</div>}
+              </div>
+              <div className="field">
+                <label className="label" htmlFor="description">
+                  Description
+                </label>
+                <div className="control">
+                  <input
+                    className="input"
+                    type="text"
+                    name="description"
+                    id="description"
+                    value={description}
+                    onChange={handleChange}
+                  />
+                </div>
+                {errors.description && (
+                  <div className="help is-danger">{errors.description}</div>
+                )}
+              </div>
+              <div className="field">
+                <label className="label" htmlFor="category">
+                  Category
+                </label>
+                <div className="control">
+                  <input
+                    className="input"
+                    type="text"
+                    name="category"
+                    id="category"
+                    value={category}
+                    onChange={handleChange}
+                  />
+                </div>
+                {errors.category && <div className="help is-danger">{errors.category}</div>}
+              </div>
+            </>
 
-          <label htmlFor="description">Description</label>
-          <input
-            type="text"
-            name="description"
-            id="description"
-            value={description}
-            onChange={handleChange}
-          />
-          {errors.description && <p className="error">{errors.description}</p>}
-
-          <label htmlFor="category">Category</label>
-          <input
-            type="text"
-            name="category"
-            id="category"
-            value={category}
-            onChange={handleChange}
-          />
-          {errors.category && <p className="error">{errors.category}</p>}
-        </>
-
-        <button type="submit">{id ? `Update` : "Create"}</button>
-      </form>
-
-      <button type="button" onClick={() => navigate("/services")}>
-        {" "}
-        Back
-      </button>
+            <div className="field">
+              <div className="control">
+                <button className="button is-primary" type="submit">
+                  {id ? `Update` : "Create"}
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
     </>
   );
 };

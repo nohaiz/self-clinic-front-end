@@ -1,0 +1,72 @@
+.full-height-center {
+  min-height: 100vh;       
+}
+
+.background-white {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 60px;
+  border: 5px solid #3E5C8F;
+}
+.background-white {
+  background-color: white;
+ 
+}
+.custom-placement {
+  display: flex;
+  gap: 10px; 
+}
+.custom-content {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center; 
+}
+.buttons.custom-placement {
+  background-color: #3E5C8F;
+  color: white;
+  padding: 12px 14px;
+  border-radius: 15px;
+  margin: 10px;
+  gap: 8px;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.button.custom-button {
+  font-size: large;
+  border-radius: 8px;
+  background-color: white;
+  color: #6E90B7;
+  border-radius: 15px;
+}
+
+.button.custom-button-create {
+  font-size: small;
+  background-color: #6E90B7;
+  color: white; 
+}
+
+.link.has-text-link {
+  color: #6E90B7;
+}
+
+.button.is-primary {
+  display: block;
+  margin: 20px auto;
+}
+.button.custom-button:hover {
+  background-color: #f0f0f0; 
+  color: #3E5C8F; 
+}
+
+
+.notification.is-danger{
+  padding: 10px;
+}
+

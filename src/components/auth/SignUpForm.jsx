@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import authServices from "../services/authServices";
 
+import "../auth/auth.css"; 
+
 const SignUpForm = (prop) => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -109,117 +111,178 @@ const SignUpForm = (prop) => {
   } = formData;
 
   return (
-    <>
-      <h1>Sign Up</h1>
-      <form onSubmit={handleSubmit}>
-        {errors.general && <p>{errors.general}</p>}
+    <div className="hero is-small">
+      <div className="hero-body">
+        <div className="container">
+          <div className="columns is-centered is-vcentered">
+            <div className="column is-8-tablet is-6-desktop is-5-widescreen">
+              <div className="box" style={{ minHeight: '600px' }}>
+                <h1 className="title has-text-centered">Sign Up</h1>
+                <form onSubmit={handleSubmit}>
+                  {errors.general && <div className="notification is-danger">{errors.general}</div>}
+  
+                  <div className="field">
+                    <label className="label" htmlFor="email">Email</label>
+                    <div className="control">
+                      <input
+                        type="email"
+                        name="email"
+                        id="email"
+                        className={`input ${errors.email ? "is-danger" : ""}`}
+                        placeholder="e.g. example@gmail.com"
+                        value={email}
+                        onChange={handleChange}
+                      />
+                    </div>
+                    {errors.email && <p className="help is-danger">{errors.email}</p>}
+                  </div>
+  
+                  <div className="field">
+                    <label className="label" htmlFor="password">Password</label>
+                    <div className="control">
+                      <input
+                        type="password"
+                        name="password"
+                        id="password"
+                        className={`input ${errors.password ? "is-danger" : ""}`}
+                        placeholder="********"
+                        value={password}
+                        onChange={handleChange}
+                      />
+                    </div>
+                    {errors.password && <p className="help is-danger">{errors.password}</p>}
+                  </div>
+  
+                  <div className="field">
+                    <label className="label" htmlFor="confirmPassword">Confirm Password</label>
+                    <div className="control">
+                      <input
+                        type="password"
+                        name="confirmPassword"
+                        id="confirmPassword"
+                        className={`input ${errors.confirmPassword ? "is-danger" : ""}`}
+                        placeholder="********"
+                        value={confirmPassword}
+                        onChange={handleChange}
+                      />
+                    </div>
+                    {errors.confirmPassword && <p className="help is-danger">{errors.confirmPassword}</p>}
+                  </div>
+  
+                  <div className="field">
+                    <label className="label" htmlFor="firstName">First Name</label>
+                    <div className="control">
+                      <input
+                        type="text"
+                        name="firstName"
+                        id="firstName"
+                        className={`input ${errors.firstName ? "is-danger" : ""}`}
+                        placeholder="John"
+                        value={firstName}
+                        onChange={handleChange}
+                      />
+                    </div>
+                    {errors.firstName && <p className="help is-danger">{errors.firstName}</p>}
+                  </div>
+  
+                  <div className="field">
+                    <label className="label" htmlFor="lastName">Last Name</label>
+                    <div className="control">
+                      <input
+                        type="text"
+                        name="lastName"
+                        id="lastName"
+                        className={`input ${errors.lastName ? "is-danger" : ""}`}
+                        placeholder="Doe"
+                        value={lastName}
+                        onChange={handleChange}
+                      />
+                    </div>
+                    {errors.lastName && <p className="help is-danger">{errors.lastName}</p>}
+                  </div>
+  
+                  <div className="field">
+                    <label className="label" htmlFor="CPR">CPR</label>
+                    <div className="control">
+                      <input
+                        type="text"
+                        name="CPR"
+                        id="CPR"
+                        className={`input ${errors.CPR ? "is-danger" : ""}`}
+                        placeholder="123456789"
+                        value={CPR}
+                        onChange={handleChange}
+                      />
+                    </div>
+                    {errors.CPR && <p className="help is-danger">{errors.CPR}</p>}
+                  </div>
+  
+                  <div className="field">
+                    <label className="label" htmlFor="gender">Gender</label>
+                    <div className="control">
+                      <div className={`select is-small ${errors.gender ? "is-danger" : ""} `}>
+                        <select
+                          name="gender"
+                          id="gender"
+                          value={gender}
+                          onChange={handleChange}
+                        >
+                          <option value="">Select Gender</option>
+                          <option value="male">Male</option>
+                          <option value="female">Female</option>
+                        </select>
+                      </div>
+                    </div>
+                    {errors.gender && <p className="help is-danger">{errors.gender}</p>}
+                  </div>
+  
+                  <div className="field">
+                    <label className="label" htmlFor="DOB">Date of Birth</label>
+                    <div className="control">
+                        <input
+                          type="date"
+                          name="DOB"
+                          id="DOB"
+                          className={`input ${errors.DOB ? "is-danger" : ""}`}
+                          value={DOB}
+                          onChange={handleChange}
+                          max={new Date().toISOString().split('T')[0]} 
+                          />
+                    </div>
+                    {errors.DOB && <p className="help is-danger">{errors.DOB}</p>}
+                  </div>
 
-        <label htmlFor="email">Email</label>
-        <input
-          type="email"
-          name="email"
-          id="email"
-          value={email}
-          onChange={handleChange}
-        />
-        {errors.email && <p className="error">{errors.email}</p>}
-
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          value={password}
-          onChange={handleChange}
-        />
-        {errors.password && <p className="error">{errors.password}</p>}
-
-        <label htmlFor="confirmPassword">Confirm Password</label>
-        <input
-          type="password"
-          name="confirmPassword"
-          id="confirmPassword"
-          value={confirmPassword}
-          onChange={handleChange}
-        />
-        {errors.confirmPassword && (
-          <p className="error">{errors.confirmPassword}</p>
-        )}
-
-        <label htmlFor="firstName">First Name</label>
-        <input
-          type="text"
-          name="firstName"
-          id="firstName"
-          value={firstName}
-          onChange={handleChange}
-        />
-        {errors.firstName && <p className="error">{errors.firstName}</p>}
-
-        <label htmlFor="lastName">Last Name</label>
-        <input
-          type="text"
-          name="lastName"
-          id="lastName"
-          value={lastName}
-          onChange={handleChange}
-        />
-        {errors.lastName && <p className="error">{errors.lastName}</p>}
-
-        <label htmlFor="CPR">CPR</label>
-        <input
-          type="text"
-          name="CPR"
-          id="CPR"
-          value={CPR}
-          onChange={handleChange}
-        />
-        {errors.CPR && <p className="error">{errors.CPR}</p>}
-
-        <label htmlFor="gender">Gender</label>
-        <select
-          name="gender"
-          id="gender"
-          value={gender}
-          onChange={handleChange}
-        >
-          <option value="">Select Gender</option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-        </select>
-        {errors.gender && <p className="error">{errors.gender}</p>}
-
-        <label htmlFor="DOB">Date of Birth</label>
-        <input
-          type="date"
-          name="DOB"
-          id="DOB"
-          value={DOB}
-          onChange={handleChange}
-        />
-        {errors.DOB && <p className="error">{errors.DOB}</p>}
-
-        <label htmlFor="contactNumber">Contact Number</label>
-        <input
-          type="text"
-          name="contactNumber"
-          id="contactNumber"
-          value={contactNumber}
-          onChange={handleChange}
-        />
-        {errors.contactNumber && (
-          <p className="error">{errors.contactNumber}</p>
-        )}
-
-        <button type="submit" onClick={() => Object.keys(errors).length > 0}>
-          Sign Up
-        </button>
-      </form>
-      <button type="button" onClick={() => navigate("/")}>
-        Back
-      </button>
-    </>
+                  <div className="field">
+                    <label className="label" htmlFor="contactNumber">Contact Number</label>
+                    <div className="control">
+                      <input
+                        type="text"
+                        name="contactNumber"
+                        id="contactNumber"
+                        className={`input ${errors.contactNumber ? "is-danger" : ""}`}
+                        placeholder="12345678"
+                        value={contactNumber}
+                        onChange={handleChange}
+                      />
+                    </div>
+                    {errors.contactNumber && <p className="help is-danger">{errors.contactNumber}</p>}
+                  </div>
+  
+                  <div className="field">
+                    <button type="submit" className="button is-fullwidth is-white">Sign Up</button>
+                  </div>
+  
+                  <div className="field">
+                    <button type="button" className="button is-link is-fullwidth" onClick={() => navigate("/")}>Back</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
-};
+}  
 
 export default SignUpForm;

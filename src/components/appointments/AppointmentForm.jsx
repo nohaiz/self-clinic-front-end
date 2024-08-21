@@ -4,6 +4,8 @@ import offeredServices from "../services/service";
 import appointmentServices from "../services/appointmentServices";
 import patientServices from "../services/patientServices";
 import doctorServices from "../services/doctorServices";
+import "./appointment.css";
+
 const AppointmentForm = ({ user }) => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -28,10 +30,10 @@ const AppointmentForm = ({ user }) => {
       const data = await appointmentServices.fetchAppointment(id);
       setFormData({
         ...data,
-        date: data.date.split("T")[0],
-        patient: data.patient._id,
-        doctor: data.doctor._id,
-        service: data.service._id,
+        date: data?.date.split("T")[0],
+        patient: data?.patient?._id,
+        doctor: data?.doctor?._id,
+        service: data?.service?._id,
       });
     }
   };
@@ -84,9 +86,12 @@ const AppointmentForm = ({ user }) => {
     if (!service) errors.service = "Service is required.";
     if (!doctor) errors.doctor = "Doctor is required.";
     if (!status) errors.status = "Status is required.";
-    
-    if ((user.type.hasOwnProperty(2000) ||
-    user.type.hasOwnProperty(5000)) && !patient ) errors.patient = "Patient is required.";
+
+    if (
+      (user.type.hasOwnProperty(2000) || user.type.hasOwnProperty(5000)) &&
+      !patient
+    )
+      errors.patient = "Patient is required.";
     return errors;
   };
   const handleSubmit = async (e) => {
@@ -125,8 +130,10 @@ const AppointmentForm = ({ user }) => {
           user: user.type.hasOwnProperty(2000)
             ? user.type[2000]
             : user.type[5000],
-            patient: (!user.type.hasOwnProperty(2000) &&
-              !user.type.hasOwnProperty(5000) )? user.type[3000]:formData.patient
+          patient:
+            !user.type.hasOwnProperty(2000) && !user.type.hasOwnProperty(5000)
+              ? user.type[3000]
+              : formData.patient,
         });
 
         if (response.error) {
@@ -161,129 +168,198 @@ const AppointmentForm = ({ user }) => {
 
   return (
     <>
-      <h1>{id ? "Update Appointment " : "Create Appointment"}</h1>
-      <form onSubmit={handleSubmit}>
-        {errors.general && <p>{errors.general}</p>}
-
-        <>
-          <label htmlFor="date">Date</label>
-          <input
-            type="date"
-            name="date"
-            id="date"
-            value={date}
-            onChange={handleChange}
-          />
-          {errors.date && <p className="error">{errors.date}</p>}
-
-          <label htmlFor="startTime">Start Time</label>
-          <input
-            type="time"
-            name="startTime"
-            id="startTime"
-            value={startTime}
-            onChange={handleChange}
-          />
-          {errors.startTime && <p className="error">{errors.startTime}</p>}
-
-          <label htmlFor="endTime">End Time</label>
-          <input
-            type="time"
-            name="endTime"
-            id="endTime"
-            value={endTime}
-            onChange={handleChange}
-          />
-          {errors.endTime && <p className="error">{errors.endTime}</p>}
-
-          <label htmlFor="service">Service</label>
-          <select
-            name="service"
-            id="service"
-            value={service}
-            onChange={handleChange}
+      <div className="custom-form">
+        <div className="container ">
+          <form
+            className="box has-background-white  column is-three-fifths is-offset-one-fifth"
+            onSubmit={handleSubmit}
           >
-            <option value="">Select Service</option>
-            {services.length > 0 &&
-             services.map((service) => (
-                <option key={service._id} value={service._id}>
-                  {service.name}
-                </option>
-              ))}
-          </select>
-          {errors.service && <p className="error">{errors.service}</p>}
+            <p className="title is-2 is-spaced">
+              {id ? "Update Appointment " : "Create Appointment"}
+            </p>
+            {errors.general && (
+              <div className="notification is-danger">{errors.general}</div>
+            )}
 
-          <label htmlFor="doctor">Doctor</label>
-          <select
-            name="doctor"
-            id="doctor"
-            value={doctor}
-            onChange={handleChange}
-          >
-            <option value="">Select Doctor</option>
-            {doctors.length > 0 && 
-              doctors.map((doc) => (
-                <option key={doc._id} value={doc._id}>
-                  {doc.firstName} {doc.lastName}
-                </option>
-              ))}
-          </select>
-          {errors.doctor && <p className="error">{errors.doctor}</p>}
-          {(user.type.hasOwnProperty(2000) ||
-            user.type.hasOwnProperty(5000)) && (
-            <>
-              <label htmlFor="patient">Patient</label>
-              <select
-                type="text"
-                name="patient"
-                id="patient"
-                value={patient}
+            <div className="field">
+              <label className="label" htmlFor="date">
+                Date
+              </label>
+              <div className="control">
+                <input
+                  className="input"
+                  type="date"
+                  name="date"
+                  id="date"
+                  value={date}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+            {errors.date && <div className="help is-danger">{errors.date}</div>}
+
+            <label className="label" htmlFor="startTime">
+              Start Time
+            </label>
+            <div className="control">
+              <input
+                className="input"
+                type="time"
+                name="startTime"
+                id="startTime"
+                value={startTime}
                 onChange={handleChange}
-              >
-                <option value="">Select Patient</option>
-                {patients.length > 0 &&
-                  patients.map((patient) => (
-                    <option key={patient._id} value={patient._id}>
-                      {patient.firstName} {patient.lastName}
-                    </option>
-                  ))}
-              </select>
-              {errors.patient && <p className="error">{errors.patient}</p>}
-            </>
-          )}
-          <label htmlFor="status">Status</label>
-          <select
-            type="text"
-            name="status"
-            id="status"
-            value={status}
-            onChange={handleChange}
-          >
-            <option value="">Select Status</option>
-            <option value="pending">Pending</option>
-            <option value="cancelled">Cancelled</option>
-            <option value="completed">Completed</option>
-          </select>
-          {errors.status && <p className="error">{errors.status}</p>}
+              />
+            </div>
+            {errors.startTime && (
+              <div className="help is-danger">{errors.startTime}</div>
+            )}
 
-          <label htmlFor="notes">Notes</label>
-          <input
-            type="text"
-            name="notes"
-            id="notes"
-            value={notes}
-            onChange={handleChange}
-          />
-          {errors.notes && <p className="error">{errors.notes}</p>}
-        </>
+            <label className="label" htmlFor="endTime">
+              End Time
+            </label>
+            <div className="control">
+              <input
+                className="input"
+                type="time"
+                name="endTime"
+                id="endTime"
+                value={endTime}
+                onChange={handleChange}
+              />
+            </div>
+            {errors.endTime && (
+              <div className="help is-danger">{errors.endTime}</div>
+            )}
 
-        <button type="submit">{id ? `Update` : "Create"}</button>
-      </form>
+            <div className="field">
+              <label className="label" htmlFor="service">
+                Service
+              </label>
+              <div className="select w-full">
+                <select
+                  className="w-full"
+                  name="service"
+                  id="service"
+                  value={service}
+                  onChange={handleChange}
+                >
+                  <option value="">Select Service</option>
+                  {services.length > 0 &&
+                    services.map((service) => (
+                      <option key={service._id} value={service._id}>
+                        {service.name}
+                      </option>
+                    ))}
+                </select>
+              </div>
+              {errors.service && (
+                <div className="help is-danger">{errors.service}</div>
+              )}
+            </div>
+            <div className="field">
+              <label className="label" htmlFor="doctor">
+                Doctor
+              </label>
+              <div className="select w-full">
+                <select
+                  className="w-full"
+                  name="doctor"
+                  id="doctor"
+                  value={doctor}
+                  onChange={handleChange}
+                >
+                  <option value="">Select Doctor</option>
+                  {doctors.length > 0 &&
+                    doctors.map((doc) => (
+                      <option key={doc._id} value={doc._id}>
+                        {doc.firstName} {doc.lastName}
+                      </option>
+                    ))}
+                </select>
+              </div>
+              {errors.doctor && (
+                <div className="help is-danger">{errors.doctor}</div>
+              )}
+            </div>
+            {(user.type.hasOwnProperty(2000) ||
+              user.type.hasOwnProperty(5000)) && (
+              <div className="field">
+                <label className="label" htmlFor="patient">
+                  Patient
+                </label>
+                <div className="select w-full">
+                  <select
+                    className="w-full"
+                    name="patient"
+                    id="patient"
+                    value={patient}
+                    onChange={handleChange}
+                  >
+                    <option value="">Select Patient</option>
+                    {patients.length > 0 &&
+                      patients.map((patient) => (
+                        <option key={patient._id} value={patient._id}>
+                          {patient.firstName} {patient.lastName}
+                        </option>
+                      ))}
+                  </select>
+                </div>
+                {errors.patient && (
+                  <div className="help is-danger">{errors.patient}</div>
+                )}
+              </div>
+            )}
+            <div className="field">
+              <label className="label" htmlFor="status">
+                Status
+              </label>
+              <div className="select w-full">
+                <select
+                  className="w-full"
+                  name="status"
+                  id="status"
+                  value={status}
+                  onChange={handleChange}
+                >
+                  <option value="">Select Status</option>
+                  <option value="pending">Pending</option>
+                  <option value="cancelled">Cancelled</option>
+                  <option value="completed">Completed</option>
+                </select>
+              </div>
+              {errors.status && (
+                <div className="help is-danger">{errors.status}</div>
+              )}
+            </div>
 
-      <button type="button" onClick={() => navigate("/appointments")}>
-        {" "}
-        Back
-      </button>
+            <label className="label" htmlFor="notes">
+              Notes
+            </label>
+            <div className="control">
+              <input
+                className="input"
+                type="text"
+                name="notes"
+                id="notes"
+                value={notes}
+                onChange={handleChange}
+              />
+            </div>
+            {errors.notes && (
+              <div className="help is-danger">{errors.notes}</div>
+            )}
+
+            <div className="field">
+              <div className="control">
+                <button className="button is-primary" type="submit">
+                  {id ? `Update` : "Create"}
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
     </>
   );
 };
