@@ -17,6 +17,7 @@ const indexAllDoctors = async () => {
 };
 
 const createDoctor = async (formData) => {
+  console.log("formData", formData);
   try {
     const res = await fetch(`${BACKEND_URL}/users/doctors`, {
       method: "POST",
@@ -27,6 +28,7 @@ const createDoctor = async (formData) => {
       body: JSON.stringify(formData),
     });
     const json = await res.json();
+    console.log("json", json);
     if (json.error) {
       throw new Error(json.error);
     }

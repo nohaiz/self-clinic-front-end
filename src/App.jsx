@@ -29,6 +29,7 @@ import ManageService from "./components/offeredServices/ManageServices";
 import ServiceForm from "./components/offeredServices/ServiceForm";
 // PRIVATE ROUTES
 import DashBoard from "./components/dashboard/Dashboard";
+import CreateDoctorForm from "./components/profiles/doctor/CreateDoctor";
 
 function App() {
   const [user, setUser] = useState(authServices.getUser());
@@ -121,21 +122,31 @@ function App() {
                 <Route
                   path="/users"
                   element={
-                    <ManageUsers user={user} handleDeleteUser={handleDeleteUser}/>
+                    <ManageUsers
+                      user={user}
+                      handleDeleteUser={handleDeleteUser}
+                    />
                   }
-                >
-                </Route>
+                ></Route>
+                <Route
+                  path="/users/doctors"
+                  element={<CreateDoctorForm />}
+                ></Route>
               </>
             ) : (
               <></>
             )}
 
-            {user.type.hasOwnProperty(3000) || user.type.hasOwnProperty(2000)? (
+            {user.type.hasOwnProperty(3000) ||
+            user.type.hasOwnProperty(2000) ? (
               <>
                 <Route
                   path={`/users/patients/:id`}
                   element={
-                    <PatientDetails handleDeleteUser={handleDeleteUser} user={user} />
+                    <PatientDetails
+                      handleDeleteUser={handleDeleteUser}
+                      user={user}
+                    />
                   }
                 />
                 <Route
@@ -147,12 +158,16 @@ function App() {
               <></>
             )}
 
-            {user.type.hasOwnProperty(5000) || user.type.hasOwnProperty(2000) ? (
+            {user.type.hasOwnProperty(5000) ||
+            user.type.hasOwnProperty(2000) ? (
               <>
                 <Route
                   path={`/users/doctors/:id`}
                   element={
-                    <DoctorDetails handleDeleteUser={handleDeleteUser} user={user}/>
+                    <DoctorDetails
+                      handleDeleteUser={handleDeleteUser}
+                      user={user}
+                    />
                   }
                 ></Route>
                 <Route
