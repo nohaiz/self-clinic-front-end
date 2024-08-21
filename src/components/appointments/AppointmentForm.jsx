@@ -125,8 +125,8 @@ const AppointmentForm = ({ user }) => {
           user: user.type.hasOwnProperty(2000)
             ? user.type[2000]
             : user.type[5000],
-            patient: !user.type.hasOwnProperty(2000) &&
-              !user.type.hasOwnProperty(5000) && user.type[3000]
+            patient: (!user.type.hasOwnProperty(2000) &&
+              !user.type.hasOwnProperty(5000) )? user.type[3000]:formData.patient
         });
 
         if (response.error) {
@@ -205,7 +205,7 @@ const AppointmentForm = ({ user }) => {
           >
             <option value="">Select Service</option>
             {services.length > 0 &&
-              services.map((service) => (
+             services.map((service) => (
                 <option key={service._id} value={service._id}>
                   {service.name}
                 </option>
@@ -221,7 +221,7 @@ const AppointmentForm = ({ user }) => {
             onChange={handleChange}
           >
             <option value="">Select Doctor</option>
-            {doctors.length > 0 &&
+            {doctors.length > 0 && 
               doctors.map((doc) => (
                 <option key={doc._id} value={doc._id}>
                   {doc.firstName} {doc.lastName}
@@ -261,7 +261,7 @@ const AppointmentForm = ({ user }) => {
           >
             <option value="">Select Status</option>
             <option value="pending">Pending</option>
-            <option value="camcelled">Cancelled</option>
+            <option value="cancelled">Cancelled</option>
             <option value="completed">Completed</option>
           </select>
           {errors.status && <p className="error">{errors.status}</p>}
