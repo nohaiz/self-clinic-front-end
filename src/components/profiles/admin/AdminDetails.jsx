@@ -1,3 +1,5 @@
+import "../admin/admin.css"
+
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -23,34 +25,36 @@ const AdminDetails = ({ handleDeleteUser }) => {
   }, [id]);
 
   return (
-    <>
-      <p>
-        Full Name: {userAdmin.firstName} {userAdmin.lastName}
-      </p>
-      <p>CPR: {userAdmin.CPR}</p>
-      <p>Contact Number: {userAdmin.contactNumber}</p>
+    <div className="container">
+      <div className="box">
+        <div className="content">
+          <p className="title is-2 is-spaced">
+            {userAdmin.firstName} {userAdmin.lastName}
+          </p>
+          <p className="subtitle is-6">CPR: {userAdmin.CPR}</p>
+          <p className="subtitle is-6">Contact Number: {userAdmin.contactNumber}</p>
+        </div>
 
-      <Link to={`/users/admins/${id}/edit`}>
-        <button type="button">Edit</button>
-      </Link>
+        <div className="buttons mt-4">
+          <Link to={`/users/admins/${id}/edit`}>
+            <button className="button is-primary ">Edit Profile</button>
+          </Link>
 
-      <button
-        type="button"
-        onClick={() => {
-          handleDeleteUser(userType, id);
-        }}
-      >
-        Delete
-      </button>
+          <Link to="/users">
+            <button className="button is-info">Manage Users</button>
+          </Link>
 
-      <Link to="/users">
-        <button type="button">Manage Users</button>
-      </Link>
+          <button
+            className="button is-danger"
+            type="button"
+            onClick={() => handleDeleteUser(userType, id)}
+          >
+            Delete Profile
+          </button>
 
-      <Link to="/users/doctors">
-        <button type="button">Create Doctors</button>
-      </Link>
-    </>
+        </div>
+      </div>
+    </div>
   );
 };
 

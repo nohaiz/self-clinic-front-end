@@ -1,0 +1,14 @@
+.container .box {
+  margin-top: 15%;
+}
+
+.custom-form .container .box {
+  margin-top: 10%;
+}
+
+p.title {
+  margin-top: 30px;
+}
+.container .title:not(:last-child) {
+  margin-bottom: 30px;
+}

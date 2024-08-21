@@ -9,6 +9,7 @@ import "./index.css";
 import 'bulma/css/bulma.min.css';
 
 
+
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
