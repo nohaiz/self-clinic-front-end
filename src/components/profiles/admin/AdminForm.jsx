@@ -1,3 +1,5 @@
+import "../admin/admin.css"
+
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -25,7 +27,7 @@ const AdminForm = ({ user }) => {
       }
     };
     fetchAdminData();
-  }, [id]);
+  }, [id,errors.general]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -130,141 +132,195 @@ const AdminForm = ({ user }) => {
 
   return (
     <>
-      <h1>{id ? "Update Administrator Profile" : "Administrator Registration"}</h1>
-      <form onSubmit={handleSubmit}>
-        {errors.general && <p>{errors.general}</p>}
-
-        {!id ? (
-          <>
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              value={email}
-              onChange={handleChange}
-            />
-            {errors.email && <p className="error">{errors.email}</p>}
-
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              value={password}
-              onChange={handleChange}
-            />
-            {errors.password && <p className="error">{errors.password}</p>}
-
-            <label htmlFor="confirmPassword">Confirm Password</label>
-            <input
-              type="password"
-              name="confirmPassword"
-              id="confirmPassword"
-              value={confirmPassword}
-              onChange={handleChange}
-            />
-            {errors.confirmPassword && (
-              <p className="error">{errors.confirmPassword}</p>
-            )}
-
+    <div className="custom-form">
+      <div className="container">
+        <form onSubmit={handleSubmit} className="box column is-three-fifths is-offset-one-fifth">
+          <p className="title is-2 is-spaced">
+            {id ? "Update Admin Profile" : "Administrator Registration"}
+          </p>
+          {errors.general && <div className="notification is-danger">{errors.general}</div>}
+  
+          {!id ? (
             <>
-              <label htmlFor="firstName">First Name</label>
-              <input
-                type="text"
-                name="firstName"
-                id="firstName"
-                value={firstName}
-                onChange={handleChange}
-              />
-              {errors.firstName && <p className="error">{errors.firstName}</p>}
-
-              <label htmlFor="lastName">Last Name</label>
-              <input
-                type="text"
-                name="lastName"
-                id="lastName"
-                value={lastName}
-                onChange={handleChange}
-              />
-              {errors.lastName && <p className="error">{errors.lastName}</p>}
-
-              <label htmlFor="CPR">CPR</label>
-              <input
-                type="text"
-                name="CPR"
-                id="CPR"
-                value={CPR}
-                onChange={handleChange}
-              />
-              {errors.CPR && <p className="error">{errors.CPR}</p>}
-
-              <label htmlFor="contactNumber">Contact Number</label>
-              <input
-                type="text"
-                name="contactNumber"
-                id="contactNumber"
-                value={contactNumber}
-                onChange={handleChange}
-              />
-              {errors.contactNumber && (
-                <p className="error">{errors.contactNumber}</p>
-              )}
+              <div className="field">
+                <label className="label" htmlFor="email">Email</label>
+                <div className="control">
+                  <input
+                    className="input"
+                    type="email"
+                    name="email"
+                    id="email"
+                    value={email}
+                    onChange={handleChange}
+                  />
+                </div>
+                {errors.email && <p className="help is-danger">{errors.email}</p>}
+              </div>
+  
+              <div className="field">
+                <label className="label" htmlFor="password">Password</label>
+                <div className="control">
+                  <input
+                    className="input"
+                    type="password"
+                    name="password"
+                    id="password"
+                    value={password}
+                    onChange={handleChange}
+                  />
+                </div>
+                {errors.password && <p className="help is-danger">{errors.password}</p>}
+              </div>
+  
+              <div className="field">
+                <label className="label" htmlFor="confirmPassword">Confirm Password</label>
+                <div className="control">
+                  <input
+                    className="input"
+                    type="password"
+                    name="confirmPassword"
+                    id="confirmPassword"
+                    value={confirmPassword}
+                    onChange={handleChange}
+                  />
+                </div>
+                {errors.confirmPassword && <p className="help is-danger">{errors.confirmPassword}</p>}
+              </div>
+  
+              <div className="field">
+                <label className="label" htmlFor="firstName">First Name</label>
+                <div className="control">
+                  <input
+                    className="input"
+                    type="text"
+                    name="firstName"
+                    id="firstName"
+                    value={firstName}
+                    onChange={handleChange}
+                  />
+                </div>
+                {errors.firstName && <p className="help is-danger">{errors.firstName}</p>}
+              </div>
+  
+              <div className="field">
+                <label className="label" htmlFor="lastName">Last Name</label>
+                <div className="control">
+                  <input
+                    className="input"
+                    type="text"
+                    name="lastName"
+                    id="lastName"
+                    value={lastName}
+                    onChange={handleChange}
+                  />
+                </div>
+                {errors.lastName && <p className="help is-danger">{errors.lastName}</p>}
+              </div>
+  
+              <div className="field">
+                <label className="label" htmlFor="CPR">CPR</label>
+                <div className="control">
+                  <input
+                    className="input"
+                    type="text"
+                    name="CPR"
+                    id="CPR"
+                    value={CPR}
+                    onChange={handleChange}
+                  />
+                </div>
+                {errors.CPR && <p className="help is-danger">{errors.CPR}</p>}
+              </div>
+  
+              <div className="field">
+                <label className="label" htmlFor="contactNumber">Contact Number</label>
+                <div className="control">
+                  <input
+                    className="input"
+                    type="text"
+                    name="contactNumber"
+                    id="contactNumber"
+                    value={contactNumber}
+                    onChange={handleChange}
+                  />
+                </div>
+                {errors.contactNumber && <p className="help is-danger">{errors.contactNumber}</p>}
+              </div>
             </>
-          </>
-        ) : (
-          <>
-            <label htmlFor="firstName">First Name</label>
-            <input
-              type="text"
-              name="firstName"
-              id="firstName"
-              value={firstName}
-              onChange={handleChange}
-            />
-            {errors.firstName && <p className="error">{errors.firstName}</p>}
-
-            <label htmlFor="lastName">Last Name</label>
-            <input
-              type="text"
-              name="lastName"
-              id="lastName"
-              value={lastName}
-              onChange={handleChange}
-            />
-            {errors.lastName && <p className="error">{errors.lastName}</p>}
-
-            <label htmlFor="CPR">CPR</label>
-            <input
-              type="text"
-              name="CPR"
-              id="CPR"
-              value={CPR}
-              onChange={handleChange}
-            />
-            {errors.CPR && <p className="error">{errors.CPR}</p>}
-
-            <label htmlFor="contactNumber">Contact Number</label>
-            <input
-              type="text"
-              name="contactNumber"
-              id="contactNumber"
-              value={contactNumber}
-              onChange={handleChange}
-            />
-            {errors.contactNumber && (
-              <p className="error">{errors.contactNumber}</p>
-            )}
-          </>
-        )}
-
-        <button type="submit">{id ? `Confirm` : 'Sign up' }</button>
-      </form>
-      {id ? 
-      <button type="button" onClick={() =>navigate(`/users/admins/${id}`)}> Back</button>
-      :
-      <button type="button" onClick={() =>navigate('/users')}> Back</button>
-      }
+          ) : (
+            <>
+              <div className="field">
+                <label className="label" htmlFor="firstName">First Name</label>
+                <div className="control">
+                  <input
+                    className="input"
+                    type="text"
+                    name="firstName"
+                    id="firstName"
+                    value={firstName}
+                    onChange={handleChange}
+                  />
+                </div>
+                {errors.firstName && <p className="help is-danger">{errors.firstName}</p>}
+              </div>
+  
+              <div className="field">
+                <label className="label" htmlFor="lastName">Last Name</label>
+                <div className="control">
+                  <input
+                    className="input"
+                    type="text"
+                    name="lastName"
+                    id="lastName"
+                    value={lastName}
+                    onChange={handleChange}
+                  />
+                </div>
+                {errors.lastName && <p className="help is-danger">{errors.lastName}</p>}
+              </div>
+  
+              <div className="field">
+                <label className="label" htmlFor="CPR">CPR</label>
+                <div className="control">
+                  <input
+                    className="input"
+                    type="text"
+                    name="CPR"
+                    id="CPR"
+                    value={CPR}
+                    onChange={handleChange}
+                  />
+                </div>
+                {errors.CPR && <p className="help is-danger">{errors.CPR}</p>}
+              </div>
+  
+              <div className="field">
+                <label className="label" htmlFor="contactNumber">Contact Number</label>
+                <div className="control">
+                  <input
+                    className="input"
+                    type="text"
+                    name="contactNumber"
+                    id="contactNumber"
+                    value={contactNumber}
+                    onChange={handleChange}
+                  />
+                </div>
+                {errors.contactNumber && <p className="help is-danger">{errors.contactNumber}</p>}
+              </div>
+            </>
+          )}
+  
+          <div className="field">
+            <div className="control">
+              <button type="submit" className="button is-primary">
+                {id ? `Confirm` : 'Sign up' }
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
     </>
   );
 };

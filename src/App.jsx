@@ -24,8 +24,12 @@ import DoctorDetails from "./components/profiles/doctor/DoctorDetails";
 import UpdateDoctorForm from "./components/profiles/doctor/UpdateDoctor";
 import patientServices from "./components/services/patientServices";
 import doctorServices from "./components/services/doctorServices";
+// Offered Services
+import ManageService from "./components/offeredServices/ManageServices";
+import ServiceForm from "./components/offeredServices/ServiceForm";
 // PRIVATE ROUTES
 import DashBoard from "./components/dashboard/Dashboard";
+import CreateDoctorForm from "./components/profiles/doctor/CreateDoctor";
 
 function App() {
   const [user, setUser] = useState(authServices.getUser());
@@ -64,34 +68,6 @@ function App() {
     }
   };
 
-  // const handleDeletePatient = async (userType, id) => {
-  //   try {
-  //     if (userType === "patients") {
-  //       await patientServices.deletePatient(userType, id);
-  //       if (user.type[3000] === id) {
-  //         handleSignout();
-  //         navigate("/");
-  //       }
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // const handleDeleteDoctor = async (userType, id) => {
-  //   try {
-  //     if (userType === "doctors") {
-  //       await doctorServices.deleteDoctor(userType, id);
-  //       if (user.type[5000] === id) {
-  //         handleSignout();
-  //         navigate("/");
-  //       }
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
   return (
     <>
       <NavBar user={user} handleSignout={handleSignout} />
@@ -118,21 +94,31 @@ function App() {
                 <Route
                   path="/users"
                   element={
-                    <ManageUsers user={user} handleDeleteUser={handleDeleteUser}/>
+                    <ManageUsers
+                      user={user}
+                      handleDeleteUser={handleDeleteUser}
+                    />
                   }
-                >
-                </Route>
+                ></Route>
+                <Route
+                  path="/users/doctors"
+                  element={<CreateDoctorForm />}
+                ></Route>
               </>
             ) : (
               <></>
             )}
 
-            {user.type.hasOwnProperty(3000) || user.type.hasOwnProperty(2000)? (
+            {user.type.hasOwnProperty(3000) ||
+            user.type.hasOwnProperty(2000) ? (
               <>
                 <Route
                   path={`/users/patients/:id`}
                   element={
-                    <PatientDetails handleDeleteUser={handleDeleteUser} user={user} />
+                    <PatientDetails
+                      handleDeleteUser={handleDeleteUser}
+                      user={user}
+                    />
                   }
                 />
                 <Route
@@ -144,12 +130,16 @@ function App() {
               <></>
             )}
 
-            {user.type.hasOwnProperty(5000) || user.type.hasOwnProperty(2000) ? (
+            {user.type.hasOwnProperty(5000) ||
+            user.type.hasOwnProperty(2000) ? (
               <>
                 <Route
                   path={`/users/doctors/:id`}
                   element={
-                    <DoctorDetails handleDeleteUser={handleDeleteUser} user={user}/>
+                    <DoctorDetails
+                      handleDeleteUser={handleDeleteUser}
+                      user={user}
+                    />
                   }
                 ></Route>
                 <Route
@@ -159,6 +149,15 @@ function App() {
               </>
             ) : (
               <></>
+            )}
+            <Route path="/services" element={<ManageService user={user} />} />
+            {(user.type.hasOwnProperty(5000) ||
+              user.type.hasOwnProperty(2000)) && (
+              <Route path="/services/create" element={<ServiceForm user={user} />} />
+            )}
+            {(user.type.hasOwnProperty(5000) ||
+              user.type.hasOwnProperty(2000)) && (
+              <Route path="/services/:id" element={<ServiceForm user={user} />} />
             )}
           </>
         ) : (

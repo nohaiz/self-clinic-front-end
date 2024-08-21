@@ -13,7 +13,10 @@ const UpdatePatientForm = () => {
     CPR: 0,
     contactNumber: "",
     DOB: "",
+    gender: "",
   });
+
+  const [errors, setErrors] = useState({});
 
   const genderOptions = ["male", "female"];
 
@@ -21,7 +24,7 @@ const UpdatePatientForm = () => {
     const getPatient = async () => {
       try {
         const patientData = await patientServices.fetchPatient(id);
-        setFormData(patientData);
+        setFormData({ ...patientData, DOB: patientData.DOB.split("T")[0] });
       } catch (error) {
         console.error("Error fetching patient data:", error);
       }
@@ -33,8 +36,33 @@ const UpdatePatientForm = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const validateForm = () => {
+    const errors = {};
+    const { firstName, lastName, CPR, contactNumber, DOB, gender } = formData;
+    if (!firstName || !/^[A-Za-z]+$/.test(firstName))
+      errors.firstName = "First name must contain only letters.";
+    if (!lastName || !/^[A-Za-z]+$/.test(lastName))
+      errors.lastName = "Last name must contain only letters.";
+    if (!CPR || CPR.toString().length !== 9)
+      errors.CPR = "CPR must be 9 digits long.";
+    if (!contactNumber || contactNumber.length !== 8)
+      errors.contactNumber = "Contact number must be 8 digits long.";
+    if (!DOB || new Date(DOB) > Date.now())
+      errors.DOB = "Date of birth cannot be a future date.";
+    if (!gender) errors.gender = "Gender is required.";
+
+    setErrors(errors);
+    return errors;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const validationErrors = validateForm();
+
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
     try {
       await patientServices.updatePatient(id, formData);
       navigate(`/users/patients/${id}`);
@@ -44,53 +72,67 @@ const UpdatePatientForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="firstName">First Name</label>
-      <input
-        type="text"
-        name="firstName"
-        value={formData.firstName}
-        onChange={handleChange}
-      />
-      <label htmlFor="lastName">Last Name</label>
-      <input
-        type="text"
-        name="lastName"
-        value={formData.lastName}
-        onChange={handleChange}
-      />
-      <label htmlFor="CPR">CPR</label>
-      <input
-        type="number"
-        name="CPR"
-        value={formData.CPR}
-        onChange={handleChange}
-      />
-      <label htmlFor="contactNumber">Contact Number</label>
-      <input
-        type="text"
-        name="contactNumber"
-        value={formData.contactNumber}
-        onChange={handleChange}
-      />
-      <label htmlFor="DOB">Date of Birth</label>
-      <input
-        type="date"
-        name="DOB"
-        value={formData.DOB}
-        onChange={handleChange}
-      />
-      <label htmlFor="gender">Gender</label>
-      <select name="gender" value={formData.gender} onChange={handleChange}>
-        <option value="">Select Gender</option>
-        {genderOptions.map((gender) => (
-          <option key={gender} value={gender}>
-            {gender}
-          </option>
-        ))}
-      </select>
-      <button type="submit">Update</button>
-    </form>
+    <>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="firstName">First Name</label>
+        <input
+          type="text"
+          name="firstName"
+          value={formData.firstName}
+          onChange={handleChange}
+        />
+        {errors.firstName && <p>{errors.firstName}</p>}
+
+        <label htmlFor="lastName">Last Name</label>
+        <input
+          type="text"
+          name="lastName"
+          value={formData.lastName}
+          onChange={handleChange}
+        />
+        {errors.lastName && <p>{errors.lastName}</p>}
+
+        <label htmlFor="CPR">CPR</label>
+        <input
+          type="number"
+          name="CPR"
+          value={formData.CPR}
+          onChange={handleChange}
+        />
+        {errors.CPR && <p>{errors.CPR}</p>}
+        <label htmlFor="contactNumber">Contact Number</label>
+        <input
+          type="text"
+          name="contactNumber"
+          value={formData.contactNumber}
+          onChange={handleChange}
+        />
+        {errors.contactNumber && <p>{errors.contactNumber}</p>}
+        <label htmlFor="DOB">Date of Birth</label>
+        <input
+          type="date"
+          name="DOB"
+          value={formData.DOB}
+          onChange={handleChange}
+        />
+        {errors.DOB && <p>{errors.DOB}</p>}
+        <label htmlFor="gender">Gender</label>
+        <select name="gender" value={formData.gender} onChange={handleChange}>
+          <option value="">Select Gender</option>
+          {genderOptions.map((gender) => (
+            <option key={gender} value={gender}>
+              {gender}
+            </option>
+          ))}
+        </select>
+        {errors.gender && <p>{errors.gender}</p>}
+
+        <button type="submit">Update</button>
+      </form>
+      <button type="button" onClick={() => navigate(`/users/patients/${id}`)}>
+        Back
+      </button>
+    </>
   );
 };
 
