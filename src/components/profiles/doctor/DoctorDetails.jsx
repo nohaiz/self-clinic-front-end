@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-
+import "./doctor.css";
 // Services
 import doctorServices from "../../services/doctorServices";
 
@@ -34,45 +34,53 @@ const DoctorDetails = ({ handleDeleteUser, user }) => {
     };
     fetchDoctor();
   }, [id]);
-
   return (
-    <>
-      <p>
-        Full Name: {doctor.firstName} {doctor.lastName}
-      </p>
-      <p>CPR: {doctor.CPR}</p>
-      <p>Contact Number: {doctor.contactNumber}</p>
-      <p>Specialization: {doctor.specialization}</p>
-      <p>Availability:</p>
-      {doctor.availability && Array.isArray(doctor.availability) ? (
-        <ul>
-          {doctor.availability.map((slot, index) => (
-            <li key={index}>
-              {slot.day}: {formatTimeTo12Hour(slot.startTime)} -{" "}
-              {formatTimeTo12Hour(slot.endTime)}
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No availability information available.</p>
-      )}
-      <Link to={`/users/doctors/${id}/edit`}>
-        <button type="button">Edit</button>
-      </Link>
+    <div className="container">
+      <div className="box">
+        <p className="title is-2 is-spaced">
+          {doctor.firstName} {doctor.lastName}
+        </p>
 
-      {user.type.hasOwnProperty(2000) ? (
-        <></>
-      ) : (
-        <button
-          type="button"
-          onClick={() => {
-            handleDeleteUser(userType, id);
-          }}
-        >
-          Delete
-        </button>
-      )}
-    </>
+        <div className="content">
+          <p className="subtitle is-6">CPR: {doctor.CPR}</p>
+          <p className="subtitle is-6">
+            Contact Number: {doctor.contactNumber}
+          </p>
+          <p className="subtitle is-6">
+            Specialization: {doctor.specialization}
+          </p>
+          <p className="subtitle is-6">Availability:</p>
+          {doctor.availability && Array.isArray(doctor.availability) ? (
+            <ul className="availability-list">
+              {doctor.availability.map((slot, index) => (
+                <li key={index}>
+                  {slot.day}: {formatTimeTo12Hour(slot.startTime)} -{" "}
+                  {formatTimeTo12Hour(slot.endTime)}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>No availability information available.</p>
+          )}
+        </div>
+
+        <div className="buttons mt-4">
+          <Link to={`/users/doctors/${id}/edit`}>
+            <button className="button is-primary">Edit</button>
+          </Link>
+
+          {!user.type.hasOwnProperty(2000) && (
+            <button
+              className="button is-danger"
+              type="button"
+              onClick={() => handleDeleteUser(userType, id)}
+            >
+              Delete
+            </button>
+          )}
+        </div>
+      </div>
+    </div>
   );
 };
 
