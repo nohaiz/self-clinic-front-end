@@ -17,6 +17,7 @@ const AppointmentForm = ({ user }) => {
     status: "",
     notes: "",
   });
+
   const [services, setServices] = useState({});
   const [doctors, setDoctors] = useState({});
   const [patients, setPatients] = useState({});
@@ -82,8 +83,10 @@ const AppointmentForm = ({ user }) => {
     }
     if (!service) errors.service = "Service is required.";
     if (!doctor) errors.doctor = "Doctor is required.";
-    if (!patient) errors.patient = "Patient is required.";
     if (!status) errors.status = "Status is required.";
+    
+    if ((user.type.hasOwnProperty(2000) ||
+    user.type.hasOwnProperty(5000)) && !patient ) errors.patient = "Patient is required.";
     return errors;
   };
   const handleSubmit = async (e) => {
@@ -122,6 +125,8 @@ const AppointmentForm = ({ user }) => {
           user: user.type.hasOwnProperty(2000)
             ? user.type[2000]
             : user.type[5000],
+            patient: !user.type.hasOwnProperty(2000) &&
+              !user.type.hasOwnProperty(5000) && user.type[3000]
         });
 
         if (response.error) {
@@ -198,9 +203,7 @@ const AppointmentForm = ({ user }) => {
             value={service}
             onChange={handleChange}
           >
-            <option  value="">
-              Select Service
-            </option>
+            <option value="">Select Service</option>
             {services.length > 0 &&
               services.map((service) => (
                 <option key={service._id} value={service._id}>
@@ -226,25 +229,28 @@ const AppointmentForm = ({ user }) => {
               ))}
           </select>
           {errors.doctor && <p className="error">{errors.doctor}</p>}
-
-          <label htmlFor="patient">Patient</label>
-          <select
-            type="text"
-            name="patient"
-            id="patient"
-            value={patient}
-            onChange={handleChange}
-          >
-            <option value="">Select Patient</option>
-            {patients.length > 0 &&
-              patients.map((patient) => (
-                <option key={patient._id} value={patient._id}>
-                  {patient.firstName} {patient.lastName}
-                </option>
-              ))}
-          </select>
-          {errors.patient && <p className="error">{errors.patient}</p>}
-
+          {(user.type.hasOwnProperty(2000) ||
+            user.type.hasOwnProperty(5000)) && (
+            <>
+              <label htmlFor="patient">Patient</label>
+              <select
+                type="text"
+                name="patient"
+                id="patient"
+                value={patient}
+                onChange={handleChange}
+              >
+                <option value="">Select Patient</option>
+                {patients.length > 0 &&
+                  patients.map((patient) => (
+                    <option key={patient._id} value={patient._id}>
+                      {patient.firstName} {patient.lastName}
+                    </option>
+                  ))}
+              </select>
+              {errors.patient && <p className="error">{errors.patient}</p>}
+            </>
+          )}
           <label htmlFor="status">Status</label>
           <select
             type="text"
@@ -253,9 +259,7 @@ const AppointmentForm = ({ user }) => {
             value={status}
             onChange={handleChange}
           >
-            <option value="">
-              Select Status
-            </option>
+            <option value="">Select Status</option>
             <option value="pending">Pending</option>
             <option value="camcelled">Cancelled</option>
             <option value="completed">Completed</option>

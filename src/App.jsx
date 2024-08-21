@@ -177,10 +177,8 @@ function App() {
               <Route path="/services/:id" element={<ServiceForm user={user} />} />
             )}
             <Route path="/appointments" element={<ManageAppointments user={user} />} />
-            {(user.type.hasOwnProperty(5000) ||
-              user.type.hasOwnProperty(2000)) && (
+            
               <Route path="/appointments/create" element={<AppointmentForm user={user} />} />
-            )}
             {(user.type.hasOwnProperty(5000) ||
               user.type.hasOwnProperty(2000)) && (
               <Route path="/appointments/:id" element={<AppointmentForm user={user} />} />

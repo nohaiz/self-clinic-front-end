@@ -55,9 +55,7 @@ const ManageAppointments = ({ user }) => {
         ) : (
           <p>No data available</p>
         )}
-        {(user.type.hasOwnProperty(2000) || user.type.hasOwnProperty(5000)) && (
           <Link to="/appointments/create">Create Appointment</Link>
-        )}
       </div>
     </div>
   );
