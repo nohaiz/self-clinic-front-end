@@ -145,107 +145,212 @@ const UpdateDoctorForm = () => {
   };
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="firstName">First Name</label>
-        <input
-          type="text"
-          name="firstName"
-          value={formData.firstName}
-          onChange={handleChange}
-        />
-        {errors.firstName && <p>{errors.firstName}</p>}
+    <div className="custom-update-form">
+      <div className="container">
+        <div className="box column is-three-fifths is-offset-one-fifth">
+          <p className="title is-2">Update Doctor Details</p>
+          <form onSubmit={handleSubmit}>
+            <div className="field">
+              <label className="label" htmlFor="firstName">
+                First Name
+              </label>
+              <div className="control">
+                <input
+                  className={`input ${errors.firstName ? "is-danger" : ""}`}
+                  type="text"
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                />
+              </div>
+              {errors.firstName && (
+                <p className="help is-danger">{errors.firstName}</p>
+              )}
+            </div>
 
-        <label htmlFor="lastName">Last Name</label>
-        <input
-          type="text"
-          name="lastName"
-          value={formData.lastName}
-          onChange={handleChange}
-        />
-        {errors.lastName && <p>{errors.lastName}</p>}
+            <div className="field">
+              <label className="label" htmlFor="lastName">
+                Last Name
+              </label>
+              <div className="control">
+                <input
+                  className={`input ${errors.lastName ? "is-danger" : ""}`}
+                  type="text"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                />
+              </div>
+              {errors.lastName && (
+                <p className="help is-danger">{errors.lastName}</p>
+              )}
+            </div>
 
-        <label htmlFor="CPR">CPR</label>
-        <input
-          type="text"
-          name="CPR"
-          value={formData.CPR}
-          onChange={handleChange}
-        />
-        {errors.CPR && <p>{errors.CPR}</p>}
+            <div className="field">
+              <label className="label" htmlFor="CPR">
+                CPR
+              </label>
+              <div className="control">
+                <input
+                  className={`input ${errors.CPR ? "is-danger" : ""}`}
+                  type="text"
+                  name="CPR"
+                  value={formData.CPR}
+                  onChange={handleChange}
+                />
+              </div>
+              {errors.CPR && <p className="help is-danger">{errors.CPR}</p>}
+            </div>
 
-        <label htmlFor="contactNumber">Contact Number</label>
-        <input
-          type="text"
-          name="contactNumber"
-          value={formData.contactNumber}
-          onChange={handleChange}
-        />
-        {errors.contactNumber && <p>{errors.contactNumber}</p>}
+            <div className="field">
+              <label className="label" htmlFor="contactNumber">
+                Contact Number
+              </label>
+              <div className="control">
+                <input
+                  className={`input ${errors.contactNumber ? "is-danger" : ""}`}
+                  type="text"
+                  name="contactNumber"
+                  value={formData.contactNumber}
+                  onChange={handleChange}
+                />
+              </div>
+              {errors.contactNumber && (
+                <p className="help is-danger">{errors.contactNumber}</p>
+              )}
+            </div>
 
-        <label htmlFor="specialization">Specialization</label>
-        <input
-          type="text"
-          name="specialization"
-          value={formData.specialization}
-          onChange={handleChange}
-        />
-        {errors.specialization && <p>{errors.specialization}</p>}
+            <div className="field">
+              <label className="label" htmlFor="specialization">
+                Specialization
+              </label>
+              <div className="control">
+                <input
+                  className={`input ${
+                    errors.specialization ? "is-danger" : ""
+                  }`}
+                  type="text"
+                  name="specialization"
+                  value={formData.specialization}
+                  onChange={handleChange}
+                />
+              </div>
+              {errors.specialization && (
+                <p className="help is-danger">{errors.specialization}</p>
+              )}
+            </div>
 
-        <p>Availability</p>
-        {formData.availability.map((slot, index) => (
-          <div key={index}>
-            <label htmlFor={`day-${index}`}>Day</label>
-            <input
-              type="text"
-              name="day"
-              id={`day-${index}`}
-              value={slot.day}
-              onChange={(e) => handleAvailabilityChange(index, e)}
-            />
-            {errors[`availabilityDay${index}`] && (
-              <p>{errors[`availabilityDay${index}`]}</p>
-            )}
+            <p className="title is-4">Availability</p>
+            {formData.availability.map((slot, index) => (
+              <div className="box" key={index}>
+                <div className="field">
+                  <label className="label" htmlFor={`day-${index}`}>
+                    Day
+                  </label>
+                  <div className="control">
+                    <input
+                      className={`input ${
+                        errors[`availabilityDay${index}`] ? "is-danger" : ""
+                      }`}
+                      type="text"
+                      name="day"
+                      id={`day-${index}`}
+                      value={slot.day}
+                      onChange={(e) => handleAvailabilityChange(index, e)}
+                    />
+                  </div>
+                  {errors[`availabilityDay${index}`] && (
+                    <p className="help is-danger">
+                      {errors[`availabilityDay${index}`]}
+                    </p>
+                  )}
+                </div>
 
-            <label htmlFor={`startTime-${index}`}>Start Time</label>
-            <input
-              type="time"
-              name="startTime"
-              id={`startTime-${index}`}
-              value={slot.startTime}
-              onChange={(e) => handleAvailabilityChange(index, e)}
-            />
-            {errors[`availabilityStartTime${index}`] && (
-              <p>{errors[`availabilityStartTime${index}`]}</p>
-            )}
+                <div className="field">
+                  <label className="label" htmlFor={`startTime-${index}`}>
+                    Start Time
+                  </label>
+                  <div className="control">
+                    <input
+                      className={`input ${
+                        errors[`availabilityStartTime${index}`]
+                          ? "is-danger"
+                          : ""
+                      }`}
+                      type="time"
+                      name="startTime"
+                      id={`startTime-${index}`}
+                      value={slot.startTime}
+                      onChange={(e) => handleAvailabilityChange(index, e)}
+                    />
+                  </div>
+                  {errors[`availabilityStartTime${index}`] && (
+                    <p className="help is-danger">
+                      {errors[`availabilityStartTime${index}`]}
+                    </p>
+                  )}
+                </div>
 
-            <label htmlFor={`endTime-${index}`}>End Time</label>
-            <input
-              type="time"
-              name="endTime"
-              id={`endTime-${index}`}
-              value={slot.endTime}
-              onChange={(e) => handleAvailabilityChange(index, e)}
-            />
-            {errors[`availabilityEndTime${index}`] && (
-              <p>{errors[`availabilityEndTime${index}`]}</p>
-            )}
+                <div className="field">
+                  <label className="label" htmlFor={`endTime-${index}`}>
+                    End Time
+                  </label>
+                  <div className="control">
+                    <input
+                      className={`input ${
+                        errors[`availabilityEndTime${index}`] ? "is-danger" : ""
+                      }`}
+                      type="time"
+                      name="endTime"
+                      id={`endTime-${index}`}
+                      value={slot.endTime}
+                      onChange={(e) => handleAvailabilityChange(index, e)}
+                    />
+                  </div>
+                  {errors[`availabilityEndTime${index}`] && (
+                    <p className="help is-danger">
+                      {errors[`availabilityEndTime${index}`]}
+                    </p>
+                  )}
+                </div>
 
-            <button type="button" onClick={() => removeAvailabilitySlot(index)}>
-              Remove Slot
-            </button>
-          </div>
-        ))}
-        <button type="button" onClick={addAvailabilitySlot}>
-          Add Availability Slot
-        </button>
+                <div className="field">
+                  <button
+                    type="button"
+                    className="button is-danger"
+                    onClick={() => removeAvailabilitySlot(index)}
+                  >
+                    Remove Slot
+                  </button>
+                </div>
+              </div>
+            ))}
+            <div className="field">
+              <button
+                type="button"
+                className="button is-primary"
+                onClick={addAvailabilitySlot}
+              >
+                Add Availability Slot
+              </button>
+            </div>
 
-        <button type="submit">Update</button>
-      </form>
-      <button type="button" onClick={() => navigate(`/users/doctors/${id}`)}>
-        Back
-      </button>
-    </>
+            <div className="field">
+              <button type="submit" className="button is-link">
+                Update
+              </button>
+              <button
+                type="button"
+                className="button is-light"
+                onClick={() => navigate(`/users/doctors/${id}`)}
+              >
+                Back
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   );
 };
 

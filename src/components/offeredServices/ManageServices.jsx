@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import service from "../services/service";
 
-const ManageUsers = ({ user }) => {
+const ManageServices = ({ user }) => {
   const [data, setData] = useState([]);
+  const navigate = useNavigate();
 
   const fetchOfferedServices = async () => {
     try {
@@ -32,6 +33,7 @@ const ManageUsers = ({ user }) => {
   };
   return (
     <div>
+      <h4>Services</h4>
       <div>
         {data ? (
           <div>
@@ -40,7 +42,7 @@ const ManageUsers = ({ user }) => {
                 {service.name}
                 {user.type.hasOwnProperty(2000) && (
                   <>
-                    <Link to={`/services/${service._id}`}>Edit</Link>
+                    <button onClick={()=>navigate(`/services/${service._id}`)}>Edit</button>
                     <button onClick={() => handleDeleteService(service._id)}>
                       Delete
                     </button>{" "}
@@ -60,4 +62,4 @@ const ManageUsers = ({ user }) => {
   );
 };
 
-export default ManageUsers;
+export default ManageServices;
