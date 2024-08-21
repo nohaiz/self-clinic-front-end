@@ -72,67 +72,146 @@ const UpdatePatientForm = () => {
   };
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="firstName">First Name</label>
-        <input
-          type="text"
-          name="firstName"
-          value={formData.firstName}
-          onChange={handleChange}
-        />
-        {errors.firstName && <p>{errors.firstName}</p>}
+    <div className="custom-form">
+      <div className="container">
+        <form
+          onSubmit={handleSubmit}
+          className="box column is-three-fifths is-offset-one-fifth"
+        >
+          <p className="title is-2 is-spaced">Update Patient Profile</p>
 
-        <label htmlFor="lastName">Last Name</label>
-        <input
-          type="text"
-          name="lastName"
-          value={formData.lastName}
-          onChange={handleChange}
-        />
-        {errors.lastName && <p>{errors.lastName}</p>}
+          <div className="field">
+            <label className="label" htmlFor="firstName">
+              First Name
+            </label>
+            <div className="control">
+              <input
+                className="input"
+                type="text"
+                name="firstName"
+                id="firstName"
+                value={formData.firstName}
+                onChange={handleChange}
+              />
+            </div>
+            {errors.firstName && (
+              <p className="help is-danger">{errors.firstName}</p>
+            )}
+          </div>
 
-        <label htmlFor="CPR">CPR</label>
-        <input
-          type="number"
-          name="CPR"
-          value={formData.CPR}
-          onChange={handleChange}
-        />
-        {errors.CPR && <p>{errors.CPR}</p>}
-        <label htmlFor="contactNumber">Contact Number</label>
-        <input
-          type="text"
-          name="contactNumber"
-          value={formData.contactNumber}
-          onChange={handleChange}
-        />
-        {errors.contactNumber && <p>{errors.contactNumber}</p>}
-        <label htmlFor="DOB">Date of Birth</label>
-        <input
-          type="date"
-          name="DOB"
-          value={formData.DOB}
-          onChange={handleChange}
-        />
-        {errors.DOB && <p>{errors.DOB}</p>}
-        <label htmlFor="gender">Gender</label>
-        <select name="gender" value={formData.gender} onChange={handleChange}>
-          <option value="">Select Gender</option>
-          {genderOptions.map((gender) => (
-            <option key={gender} value={gender}>
-              {gender}
-            </option>
-          ))}
-        </select>
-        {errors.gender && <p>{errors.gender}</p>}
+          <div className="field">
+            <label className="label" htmlFor="lastName">
+              Last Name
+            </label>
+            <div className="control">
+              <input
+                className="input"
+                type="text"
+                name="lastName"
+                id="lastName"
+                value={formData.lastName}
+                onChange={handleChange}
+              />
+            </div>
+            {errors.lastName && (
+              <p className="help is-danger">{errors.lastName}</p>
+            )}
+          </div>
 
-        <button type="submit">Update</button>
-      </form>
-      <button type="button" onClick={() => navigate(`/users/patients/${id}`)}>
-        Back
-      </button>
-    </>
+          <div className="field">
+            <label className="label" htmlFor="CPR">
+              CPR
+            </label>
+            <div className="control">
+              <input
+                className="input"
+                type="number"
+                name="CPR"
+                id="CPR"
+                value={formData.CPR}
+                onChange={handleChange}
+              />
+            </div>
+            {errors.CPR && <p className="help is-danger">{errors.CPR}</p>}
+          </div>
+
+          <div className="field">
+            <label className="label" htmlFor="contactNumber">
+              Contact Number
+            </label>
+            <div className="control">
+              <input
+                className="input"
+                type="text"
+                name="contactNumber"
+                id="contactNumber"
+                value={formData.contactNumber}
+                onChange={handleChange}
+              />
+            </div>
+            {errors.contactNumber && (
+              <p className="help is-danger">{errors.contactNumber}</p>
+            )}
+          </div>
+
+          <div className="field">
+            <label className="label" htmlFor="DOB">
+              Date of Birth
+            </label>
+            <div className="control">
+              <input
+                className="input"
+                type="date"
+                name="DOB"
+                id="DOB"
+                value={formData.DOB}
+                onChange={handleChange}
+              />
+            </div>
+            {errors.DOB && <p className="help is-danger">{errors.DOB}</p>}
+          </div>
+
+          <div className="field">
+            <label className="label" htmlFor="gender">
+              Gender
+            </label>
+            <div className="control">
+              <div className="select">
+                <select
+                  name="gender"
+                  value={formData.gender}
+                  onChange={handleChange}
+                >
+                  <option value="">Select Gender</option>
+                  {genderOptions.map((gender) => (
+                    <option key={gender} value={gender}>
+                      {gender}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+            {errors.gender && <p className="help is-danger">{errors.gender}</p>}
+          </div>
+
+          <div className="field">
+            <div className="control">
+              <button type="submit" className="button is-primary">
+                Update
+              </button>
+            </div>
+          </div>
+        </form>
+
+        <button
+          className="button is-info"
+          type="button"
+          onClick={() => navigate(`/users/patients/${id}`)}
+        >
+          Back
+        </button>
+      </div>
+    </div>
   );
 };
 
