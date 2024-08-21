@@ -39,9 +39,13 @@ const ManageServices = ({ user }) => {
           <div>
             {data.map((service, index) => (
               <div key={index}>
-                {service.name}{" "}
-                {(user.type.hasOwnProperty(2000) ||
-                  user.type.hasOwnProperty(5000)) && (
+                <>                
+                <ul>{service.name}</ul>
+                <li>{service.description}</li>
+                <li>{service.category}</li>
+                </>
+
+                {user.type.hasOwnProperty(2000) && (
                   <>
                     <button onClick={()=>navigate(`/services/${service._id}`)}>Edit</button>
                     <button onClick={() => handleDeleteService(service._id)}>
@@ -55,7 +59,7 @@ const ManageServices = ({ user }) => {
         ) : (
           <p>No data available</p>
         )}
-        {(user.type.hasOwnProperty(2000) || user.type.hasOwnProperty(5000)) && (
+        {(user.type.hasOwnProperty(2000)) && (
           <Link to="/services/create">Create Service</Link>
         )}
       </div>

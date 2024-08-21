@@ -70,35 +70,6 @@ function App() {
       console.log(error);
     }
   };
-
-  // const handleDeletePatient = async (userType, id) => {
-  //   try {
-  //     if (userType === "patients") {
-  //       await patientServices.deletePatient(userType, id);
-  //       if (user.type[3000] === id) {
-  //         handleSignout();
-  //         navigate("/");
-  //       }
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // const handleDeleteDoctor = async (userType, id) => {
-  //   try {
-  //     if (userType === "doctors") {
-  //       await doctorServices.deleteDoctor(userType, id);
-  //       if (user.type[5000] === id) {
-  //         handleSignout();
-  //         navigate("/");
-  //       }
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
   return (
     <>
       <NavBar user={user} handleSignout={handleSignout} />
@@ -151,7 +122,7 @@ function App() {
               <></>
             )}
 
-            {user.type.hasOwnProperty(5000) || user.type.hasOwnProperty(2000) ? (
+            {user.type.hasOwnProperty(2000) ? (
               <>
                 <Route
                   path={`/users/doctors/:id`}
@@ -168,12 +139,10 @@ function App() {
               <></>
             )}
             <Route path="/services" element={<ManageServices user={user} />} />
-            {(user.type.hasOwnProperty(5000) ||
-              user.type.hasOwnProperty(2000)) && (
+            {(user.type.hasOwnProperty(2000)) && (
               <Route path="/services/create" element={<ServiceForm user={user} />} />
             )}
-            {(user.type.hasOwnProperty(5000) ||
-              user.type.hasOwnProperty(2000)) && (
+            {(user.type.hasOwnProperty(2000)) && (
               <Route path="/services/:id" element={<ServiceForm user={user} />} />
             )}
             <Route path="/appointments" element={<ManageAppointments user={user} />} />
