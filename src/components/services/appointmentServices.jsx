@@ -1,9 +1,9 @@
 const BACKEND_URL = `${import.meta.env.VITE_BACKEND_URL}`;
 
 
-const createService = async(formData) => {
+const createAppointment = async(formData) => {
   try {
-    const res = await fetch(`${BACKEND_URL}/services`, {
+    const res = await fetch(`${BACKEND_URL}/appointments`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -21,9 +21,9 @@ const createService = async(formData) => {
   }
 }
 
-const indexAllServices = async () => {
+const indexAllAppointments = async () => {
   try {
-    const res = await fetch(`${BACKEND_URL}/services`, {
+    const res = await fetch(`${BACKEND_URL}/appointments`, {
       method: "GET",
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     });
@@ -37,9 +37,9 @@ const indexAllServices = async () => {
   }
 };
 
-const fetchService = async (id) => {
+const fetchAppointment = async (id) => {
   try {
-    const res = await fetch(`${BACKEND_URL}/services/${id}`, {
+    const res = await fetch(`${BACKEND_URL}/appointments/${id}`, {
       method: "GET",
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     });
@@ -53,9 +53,9 @@ const fetchService = async (id) => {
   }
 };
 
-const updateService = async (id, formData) => {
+const updateAppointment = async (id, formData) => {
   try {
-    const res = await fetch(`${BACKEND_URL}/services/${id}`, {
+    const res = await fetch(`${BACKEND_URL}/appointments/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -73,9 +73,9 @@ const updateService = async (id, formData) => {
   }
 };
 
-const deleteService = async (id) => {
+const deleteAppointment = async (id) => {
   try {
-    const res = await fetch(`${BACKEND_URL}/services/${id}`, {
+    const res = await fetch(`${BACKEND_URL}/appointments/${id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -91,4 +91,4 @@ const deleteService = async (id) => {
   }
 };
 
-export default { createService,fetchService, updateService, deleteService, indexAllServices };
+export default { createAppointment,fetchAppointment, updateAppointment, deleteAppointment, indexAllAppointments };
