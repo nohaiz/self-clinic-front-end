@@ -24,7 +24,7 @@ const UpdatePatientForm = () => {
     const getPatient = async () => {
       try {
         const patientData = await patientServices.fetchPatient(id);
-        setFormData(patientData);
+        setFormData({ ...patientData, DOB: patientData.DOB.split("T")[0] });
       } catch (error) {
         console.error("Error fetching patient data:", error);
       }
