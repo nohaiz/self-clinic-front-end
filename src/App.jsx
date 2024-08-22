@@ -71,7 +71,6 @@ function App() {
       console.log(error);
     }
   };
-
   return (
     <>
       <NavBar user={user} handleSignout={handleSignout} />
@@ -155,12 +154,10 @@ function App() {
               <></>
             )}
             <Route path="/services" element={<ManageServices user={user} />} />
-            {(user.type.hasOwnProperty(5000) ||
-              user.type.hasOwnProperty(2000)) && (
+            {(user.type.hasOwnProperty(2000)) && (
               <Route path="/services/create" element={<ServiceForm user={user} />} />
             )}
-            {(user.type.hasOwnProperty(5000) ||
-              user.type.hasOwnProperty(2000)) && (
+            {(user.type.hasOwnProperty(2000)) && (
               <Route path="/services/:id" element={<ServiceForm user={user} />} />
             )}
             <Route path="/appointments" element={<ManageAppointments user={user} />} />

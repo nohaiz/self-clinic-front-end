@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import service from "../services/service";
+import "./services.css";
 
 const ManageServices = ({ user }) => {
   const [data, setData] = useState([]);
@@ -22,9 +23,6 @@ const ManageServices = ({ user }) => {
 
   const handleDeleteService = async (id) => {
     try {
-      const choice=confirm("Are you sure you want to delete this service?");
-      if(!choice) return;
-
       await service.deleteService(id);
       fetchOfferedServices();
     } catch (error) {
@@ -32,31 +30,66 @@ const ManageServices = ({ user }) => {
     }
   };
   return (
-    <div>
-      <h4>Services</h4>
-      <div>
-        {data ? (
-          <div>
-            {data.map((service, index) => (
-              <div key={index}>
-                {service.name}
-                {user.type.hasOwnProperty(2000) && (
-                  <>
-                    <button onClick={()=>navigate(`/services/${service._id}`)}>Edit</button>
-                    <button onClick={() => handleDeleteService(service._id)}>
-                      Delete
-                    </button>{" "}
-                  </>
-                )}
-              </div>
-            ))}
+    <div className="section is-small">
+      <div className="box background-white">
+        <div className="columns is-vcentered mb-4">
+          <div className="column is-12">
+            <div className="buttons custom-placement">
+              <button
+                className="button custom-button"
+              >
+                Services
+              </button>
+              {user.type.hasOwnProperty(2000) && (
+                <Link to="/services/create">
+                  <button className="button custom-button-create">+</button>
+                </Link>
+              )}
+            </div>
           </div>
-        ) : (
-          <p>No data available</p>
-        )}
-        {(user.type.hasOwnProperty(2000) || user.type.hasOwnProperty(5000)) && (
-          <Link to="/services/create">Create Service</Link>
-        )}
+        </div>
+        <p className="user-type-title">Services</p>
+        <div>
+          {data ? (
+            <div>
+              {data.map((service, index) => (
+                <div key={index} className="column">
+                  <div className="box" style={{ backgroundColor: "#f0f0f0" }}>
+                    <div
+                      className="is-flex is-justify-content-space-between "
+                      style={{ color: "hsl(0, 0%, 71%)" }}
+                    >
+                      <div>
+                        <ul>{service.name}</ul>
+                        <li>{service.description}</li>
+                        <li>{service.category}</li>
+                      </div>
+
+                      {user.type.hasOwnProperty(2000) && (
+                        <div>
+                          <button
+                            className="button mr-2"
+                            onClick={() => navigate(`/services/${service._id}`)}
+                          >
+                            Edit
+                          </button>
+                          <button
+                            className="button is-danger"
+                            onClick={() => handleDeleteService(service._id)}
+                          >
+                            Delete
+                          </button>{" "}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p>No data available</p>
+          )}
+        </div>
       </div>
     </div>
   );
