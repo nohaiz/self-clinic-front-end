@@ -1,3 +1,7 @@
 :root {
   background-color: #557DAA;
 }
+
+:root .label {
+  color: #B5B5B5;
+}

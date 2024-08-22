@@ -35,20 +35,14 @@ const ManageServices = ({ user }) => {
         <div className="columns is-vcentered mb-4">
           <div className="column is-12">
             <div className="buttons custom-placement">
-              <button
-                className="button custom-button"
-              >
-                Services
-              </button>
-              {user.type.hasOwnProperty(2000) && (
+              {user.type.hasOwnProperty(2000) ? (
                 <Link to="/services/create">
-                  <button className="button custom-button-create">+</button>
+                  <button className="button custom-button ">Service +</button>
                 </Link>
-              )}
+              ) : <div className="button custom-button">Services</div>}
             </div>
           </div>
         </div>
-        <p className="user-type-title">Services</p>
         <div>
           {data ? (
             <div>
@@ -66,9 +60,9 @@ const ManageServices = ({ user }) => {
                       </div>
 
                       {user.type.hasOwnProperty(2000) && (
-                        <div>
+                        <div className="custom-button-placement">
                           <button
-                            className="button mr-2"
+                            className="button mr-2 is-primary"
                             onClick={() => navigate(`/services/${service._id}`)}
                           >
                             Edit

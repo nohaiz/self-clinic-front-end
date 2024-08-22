@@ -76,7 +76,7 @@ const UpdatePatientForm = () => {
       <div className="container">
         <form
           onSubmit={handleSubmit}
-          className="box column is-three-fifths is-offset-one-fifth"
+          className="box column is-three-fifths is-offset-one-fifth has-background-white"
         >
           <p className="title is-2 is-spaced">Update Patient Profile</p>
 
@@ -202,14 +202,6 @@ const UpdatePatientForm = () => {
             </div>
           </div>
         </form>
-
-        <button
-          className="button is-info"
-          type="button"
-          onClick={() => navigate(`/users/patients/${id}`)}
-        >
-          Back
-        </button>
       </div>
     </div>
   );

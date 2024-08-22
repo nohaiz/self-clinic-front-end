@@ -1,8 +1,8 @@
 .full-height-center {
-  min-height: 100vh;       
+  min-height: 100vh;
 }
 
-.background-white {
+.box.background-white {
   background-color: white;
   padding: 2rem;
   border-radius: 1rem;
@@ -13,19 +13,28 @@
   margin-top: 60px;
   border: 5px solid #3E5C8F;
 }
+
 .background-white {
   background-color: white;
- 
+
 }
+
+.custom-button-placement {
+  display: flex;
+  align-items: baseline;
+}
+
 .custom-placement {
   display: flex;
-  gap: 10px; 
+  gap: 10px;
 }
+
 .custom-content {
   display: flex;
-  justify-content: space-between; 
-  align-items: center; 
+  justify-content: space-between;
+  align-items: center;
 }
+
 .buttons.custom-placement {
   background-color: #3E5C8F;
   color: white;
@@ -49,7 +58,7 @@
 .button.custom-button-create {
   font-size: small;
   background-color: #6E90B7;
-  color: white; 
+  color: white;
 }
 
 .link.has-text-link {
@@ -60,13 +69,13 @@
   display: block;
   margin: 20px auto;
 }
+
 .button.custom-button:hover {
-  background-color: #f0f0f0; 
-  color: #3E5C8F; 
+  background-color: #f0f0f0;
+  color: #3E5C8F;
 }
 
 
-.notification.is-danger{
+.notification.is-danger {
   padding: 10px;
 }
-

@@ -113,7 +113,7 @@ function App() {
             )}
 
             {user.type.hasOwnProperty(3000) ||
-            user.type.hasOwnProperty(2000) ? (
+              user.type.hasOwnProperty(2000) || user.type.hasOwnProperty(5000) ? (
               <>
                 <Route
                   path={`/users/patients/:id`}
@@ -134,7 +134,7 @@ function App() {
             )}
 
             {user.type.hasOwnProperty(5000) ||
-            user.type.hasOwnProperty(2000) ? (
+              user.type.hasOwnProperty(2000) ? (
               <>
                 <Route
                   path={`/users/doctors/:id`}
@@ -161,12 +161,12 @@ function App() {
               <Route path="/services/:id" element={<ServiceForm user={user} />} />
             )}
             <Route path="/appointments" element={<ManageAppointments user={user} />} />
-            
-              <Route path="/appointments/create" element={<AppointmentForm user={user} />} />
+
+            <Route path="/appointments/create" element={<AppointmentForm user={user} />} />
             {(user.type.hasOwnProperty(5000) ||
               user.type.hasOwnProperty(2000)) && (
-              <Route path="/appointments/:id" element={<AppointmentForm user={user} />} />
-            )}
+                <Route path="/appointments/:id" element={<AppointmentForm user={user} />} />
+              )}
           </>
         ) : (
           // PUBLIC ROUTES

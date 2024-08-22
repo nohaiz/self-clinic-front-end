@@ -57,9 +57,9 @@ const ManageUsers = ({ user, handleDeleteUser }) => {
             </div>
           </div>
         </div>
-        <p className="user-type-title">
+        {/* <p className="user-type-title">
           {userType.charAt(0).toUpperCase() + userType.slice(1)}
-        </p>
+        </p> */}
         {data.length > 0 ? (
           data.map(
             (users, index) =>

@@ -32,22 +32,15 @@ const ManageAppointments = ({ user }) => {
   return (
     <div className="section is-small">
       <div className="box background-white">
-      <div className="columns is-vcentered mb-4">
+        <div className="columns is-vcentered mb-4">
           <div className="column is-12">
             <div className="buttons custom-placement">
-              <button
-                className="button custom-button"
-              >
-                Appointments
-              </button>
-                <Link to="/appointments/create">
-                  <button className="button custom-button-create">+</button>
-                </Link>
-           
+              <Link to="/appointments/create">
+                <button className="button custom-button">Appointment +</button>
+              </Link>
             </div>
           </div>
         </div>
-        <p className="user-type-title">Appointments</p>
         <div>
           {data ? (
             <div>
@@ -59,8 +52,8 @@ const ManageAppointments = ({ user }) => {
                       style={{ color: "hsl(0, 0%, 71%)" }}
                     >
                       <div>
-                      <ul>
-                        Patient: {appointment?.patient?.firstName}
+                        <ul>
+                          Patient: {appointment?.patient?.firstName}
                         </ul>
                         <li>{appointment.date.split("T")[0]} </li>
                         <li>
@@ -69,48 +62,48 @@ const ManageAppointments = ({ user }) => {
                         <li>Service: {appointment.service.name}</li>
                         <li>Status: {appointment.status}</li>
                         <li>
-                        Doctor: {appointment?.doctor?.firstName}
+                          Doctor: {appointment?.doctor?.firstName}
                         </li>
-                       
+
                       </div>
                       {(user.type.hasOwnProperty(2000) ||
-                    user.type.hasOwnProperty(5000)) && (
-                    <div>
-                      <button
-                        onClick={() =>
-                          navigate(`/users/patients/${appointment.patient._id}`)
-                        }
-                         className="button mr-2"
-                      >
-                        View Patient
-                      </button>
-                      <button
-                        onClick={() =>
-                          navigate(`/appointments/${appointment._id}`)
-                        }
-                         className="button mr-2"
-                      >
-                        Edit
-                      </button>
-                      <button
-                       className="button is-danger"
-                        onClick={() => handleDeleteService(appointment._id)}
-                      >
-                        Delete
-                      </button>{" "}
-                    </div>
-                  )}
+                        user.type.hasOwnProperty(5000)) && (
+                          <div className="custom-button-placement">
+                            <button
+                              onClick={() =>
+                                navigate(`/users/patients/${appointment.patient._id}`)
+                              }
+                              className="button mr-2 is-info"
+                            >
+                              View Patient
+                            </button>
+                            <button
+                              onClick={() =>
+                                navigate(`/appointments/${appointment._id}`)
+                              }
+                              className="button mr-2 is-primary"
+                            >
+                              Edit
+                            </button>
+                            <button
+                              className="button is-danger"
+                              onClick={() => handleDeleteService(appointment._id)}
+                            >
+                              Delete
+                            </button>{" "}
+                          </div>
+                        )}
                     </div>
                   </div>
 
-                 
+
                 </div>
               ))}
             </div>
           ) : (
             <p>No data available</p>
           )}
-          
+
         </div>
       </div>
     </div>
