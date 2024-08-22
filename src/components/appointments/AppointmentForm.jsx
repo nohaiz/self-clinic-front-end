@@ -284,32 +284,32 @@ const AppointmentForm = ({ user }) => {
             </div>
             {(user.type.hasOwnProperty(2000) ||
               user.type.hasOwnProperty(5000)) && (
-              <div className="field">
-                <label className="label" htmlFor="patient">
-                  Patient
-                </label>
-                <div className="select w-full">
-                  <select
-                    className="w-full"
-                    name="patient"
-                    id="patient"
-                    value={patient}
-                    onChange={handleChange}
-                  >
-                    <option value="">Select Patient</option>
-                    {patients.length > 0 &&
-                      patients.map((patient) => (
-                        <option key={patient._id} value={patient._id}>
-                          {patient.firstName} {patient.lastName}
-                        </option>
-                      ))}
-                  </select>
+                <div className="field">
+                  <label className="label" htmlFor="patient">
+                    Patient
+                  </label>
+                  <div className="select w-full">
+                    <select
+                      className="w-full"
+                      name="patient"
+                      id="patient"
+                      value={patient}
+                      onChange={handleChange}
+                    >
+                      <option value="">Select Patient</option>
+                      {patients.length > 0 &&
+                        patients.map((patient) => (
+                          <option key={patient._id} value={patient._id}>
+                            {patient.firstName} {patient.lastName}
+                          </option>
+                        ))}
+                    </select>
+                  </div>
+                  {errors.patient && (
+                    <div className="help is-danger">{errors.patient}</div>
+                  )}
                 </div>
-                {errors.patient && (
-                  <div className="help is-danger">{errors.patient}</div>
-                )}
-              </div>
-            )}
+              )}
             <div className="field">
               <label className="label" htmlFor="status">
                 Status

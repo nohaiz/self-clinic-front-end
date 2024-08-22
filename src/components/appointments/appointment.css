@@ -13,18 +13,22 @@
   margin-top: 60px;
   border: 5px solid #3e5c8f;
 }
+
 .background-white {
   background-color: white;
 }
+
 .custom-placement {
   display: flex;
   gap: 10px;
 }
+
 .custom-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+
 .buttons.custom-placement {
   background-color: #3e5c8f;
   color: white;
@@ -59,6 +63,7 @@
   display: block;
   margin: 20px auto;
 }
+
 .button.custom-button:hover {
   background-color: #f0f0f0;
   color: #3e5c8f;
@@ -70,4 +75,7 @@
 
 .w-full {
   width: 100%;
+}
+.title.is-2 {
+  color: #B5B5B5; 
 }

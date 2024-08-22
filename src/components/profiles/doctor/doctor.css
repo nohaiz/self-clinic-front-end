@@ -13,15 +13,18 @@
   margin-top: 60px;
   border: 5px solid #3e5c8f;
 }
+
 .custom-placement {
   display: flex;
   gap: 10px;
 }
+
 .custom-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+
 .buttons.custom-placement {
   background-color: #3e5c8f;
   color: white;
@@ -56,10 +59,12 @@
   display: block;
   margin: 20px auto;
 }
+
 .button.custom-button:hover {
   background-color: #f0f0f0;
   color: #3e5c8f;
 }
+
 .user-type-title {
   font-size: 1.5rem;
   font-weight: bold;
@@ -86,8 +91,14 @@
 .notification.is-danger {
   padding: 10px;
 }
+
 #DOB {
   display: flex;
   justify-content: space-between;
   text-wrap: wrap;
+}
+
+.custom-button-placement {
+  display: flex;
+  justify-content: space-evenly;
 }
