@@ -123,7 +123,7 @@ const CreateDoctorForm = () => {
   return (
     <div className="custom-update-form">
       <div className="container">
-        <div className="box column is-three-fifths is-offset-one-fifth">
+        <div className="box column is-three-fifths is-offset-one-fifth has-background-white">
           <p className="title is-2">Create Doctor</p>
           <form onSubmit={handleSubmit}>
             {errors.general && (
@@ -170,9 +170,8 @@ const CreateDoctorForm = () => {
               </label>
               <div className="control">
                 <input
-                  className={`input ${
-                    errors.confirmPassword ? "is-danger" : ""
-                  }`}
+                  className={`input ${errors.confirmPassword ? "is-danger" : ""
+                    }`}
                   type="password"
                   name="confirmPassword"
                   value={formData.confirmPassword}
@@ -260,9 +259,8 @@ const CreateDoctorForm = () => {
               </label>
               <div className="control">
                 <input
-                  className={`input ${
-                    errors.specialization ? "is-danger" : ""
-                  }`}
+                  className={`input ${errors.specialization ? "is-danger" : ""
+                    }`}
                   type="text"
                   name="specialization"
                   value={formData.specialization}
@@ -337,11 +335,10 @@ const CreateDoctorForm = () => {
                   </label>
                   <div className="control">
                     <input
-                      className={`input ${
-                        errors[`availabilityStartTime${index}`]
-                          ? "is-danger"
-                          : ""
-                      }`}
+                      className={`input ${errors[`availabilityStartTime${index}`]
+                        ? "is-danger"
+                        : ""
+                        }`}
                       type="time"
                       name="startTime"
                       id={`startTime-${index}`}
@@ -362,9 +359,8 @@ const CreateDoctorForm = () => {
                   </label>
                   <div className="control">
                     <input
-                      className={`input ${
-                        errors[`availabilityEndTime${index}`] ? "is-danger" : ""
-                      }`}
+                      className={`input ${errors[`availabilityEndTime${index}`] ? "is-danger" : ""
+                        }`}
                       type="time"
                       name="endTime"
                       id={`endTime-${index}`}
@@ -390,28 +386,23 @@ const CreateDoctorForm = () => {
                 </div>
               </div>
             ))}
-
-            <div className="field">
-              <button
-                type="button"
-                className="button is-primary"
-                onClick={addAvailabilitySlot}
-              >
-                Add Availability Slot
-              </button>
+            <div className="custom-button-placement">
+              <div className="field">
+                <button
+                  type="button"
+                  className="button is-link"
+                  onClick={addAvailabilitySlot}
+                >
+                  Add Availability Slot
+                </button>
+              </div>
             </div>
-
-            <div className="field">
-              <button type="submit" className="button is-link">
-                Create
-              </button>
-              <button
-                type="button"
-                className="button is-light"
-                onClick={() => navigate(`/users`)}
-              >
-                Back
-              </button>
+            <div className="custom-button-placement">
+              <div className="field">
+                <button type="submit" className="button is-primary">
+                  Create
+                </button>
+              </div>
             </div>
           </form>
         </div>

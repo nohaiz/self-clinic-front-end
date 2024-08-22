@@ -322,17 +322,19 @@ const UpdateDoctorForm = () => {
               </div>
             ))}
             <div className="field">
-              <button
-                type="button"
-                className="button is-primary"
-                onClick={addAvailabilitySlot}
-              >
-                Add Availability Slot
-              </button>
+              <div className="custom-button-placement">
+                <button
+                  type="button"
+                  className="button is-link"
+                  onClick={addAvailabilitySlot}
+                >
+                  Add Availability Slot
+                </button>
+              </div>
             </div>
             <div className="custom-button-placement">
               <div className="field">
-                <button type="submit" className="button is-link">
+                <button type="submit" className="button is-primary">
                   Update
                 </button>
               </div>

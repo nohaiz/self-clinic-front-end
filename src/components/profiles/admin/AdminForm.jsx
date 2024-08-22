@@ -136,7 +136,7 @@ const AdminForm = ({ user }) => {
         <div className="container">
           <form
             onSubmit={handleSubmit}
-            className="box column is-three-fifths is-offset-one-fifth"
+            className="box column is-three-fifths is-offset-one-fifth has-background-white"
           >
             <p className="title is-2 is-spaced">
               {id ? "Update Admin Profile" : "Administrator Registration"}
