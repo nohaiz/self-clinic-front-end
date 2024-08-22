@@ -2,7 +2,7 @@
 
 ## DATE:22-8-2024
 
-## [Project Plan](https://trello.com/b/wL4ueIqi/cookie-monster) | [GitHub](https://github.com/nohaiz/self-clinic-back-end) | [Website]()
+## [Project Plan](https://trello.com/b/wL4ueIqi/cookie-monster) | [GitHub](https://github.com/nohaiz/self-clinic-back-end) | [Website](https://self-clinic-front-pqaddocse-nohaizs-projects.vercel.app/)
 
 ### Cookie Monster
 
@@ -45,19 +45,19 @@
 
 ## How It Works
 
-1. **Sign Up**: Click on the Sign Up button to register as a new Patient by completing the registration form.
+1. **Sign Up**: Click on the Sign Up button to register as a new Patient by completing the registration form.![alt text](./Images/SignUp.png)
 
-2. **Sign In**: Use the Sign In button to log in with your credentials. Depending on your role, you can sign in as a Patient, Admin, or Doctor.
+2. **Sign In**: Use the Sign In button to log in with your credentials. Depending on your role, you can sign in as a Patient, Admin, or Doctor. ![alt text](./Images/SigIn.png)
 
-   - **As a Patient**: You can book appointments and update your personal details.
-   - **As an Admin**: You can view all admins, patients, and doctors, create new doctors and admins, and have the option to delete doctors, patients, and admins.
-   - **As a Doctor**: You can view and manage your own appointments, update your availability, and modify your personal details.
+   - **As a Patient**: You can book appointments and update your personal details.![alt text](./Images/PatientBooking.png)
+   - **As an Admin**: You can view all admins, patients, and doctors, create new doctors and admins, and have the option to delete doctors, patients, and admins.![alt text](./Images/ManageUsers.png)
+   - **As a Doctor**: You can view and manage your own appointments, update your availability, and modify your personal details.![text alt](./Images/DoctorAppointment.png)
 
 ## Future Updates
 
 - [ ] Adding CRM for notification.
 - [ ] Adding more validation
-- [x] Making a better css
+- [] Making a better css
 
 ## Useful links
 
