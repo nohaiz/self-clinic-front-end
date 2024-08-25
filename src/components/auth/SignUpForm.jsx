@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import authServices from "../services/authServices";
 
-import "../auth/auth.css"; 
+import "../auth/auth.css";
 
 const SignUpForm = (prop) => {
   const navigate = useNavigate();
@@ -71,11 +71,11 @@ const SignUpForm = (prop) => {
     try {
       setErrors({});
       const response = await authServices.signup(formData);
-      prop.setUser(response);
 
       if (response.error || response.message) {
-        setErrors({ general: "User data entry invalid. Please try again." });
+        setErrors({ general: `User data entry invalid. Please try again. ${response.error}` });
       } else {
+        prop.setUser(response);
         navigate("/");
       }
     } catch (error) {
@@ -120,7 +120,7 @@ const SignUpForm = (prop) => {
                 <h1 className="title has-text-centered">Sign Up</h1>
                 <form onSubmit={handleSubmit}>
                   {errors.general && <div className="notification is-danger">{errors.general}</div>}
-  
+
                   <div className="field">
                     <label className="label" htmlFor="email">Email</label>
                     <div className="control">
@@ -136,7 +136,7 @@ const SignUpForm = (prop) => {
                     </div>
                     {errors.email && <p className="help is-danger">{errors.email}</p>}
                   </div>
-  
+
                   <div className="field">
                     <label className="label" htmlFor="password">Password</label>
                     <div className="control">
@@ -152,7 +152,7 @@ const SignUpForm = (prop) => {
                     </div>
                     {errors.password && <p className="help is-danger">{errors.password}</p>}
                   </div>
-  
+
                   <div className="field">
                     <label className="label" htmlFor="confirmPassword">Confirm Password</label>
                     <div className="control">
@@ -168,7 +168,7 @@ const SignUpForm = (prop) => {
                     </div>
                     {errors.confirmPassword && <p className="help is-danger">{errors.confirmPassword}</p>}
                   </div>
-  
+
                   <div className="field">
                     <label className="label" htmlFor="firstName">First Name</label>
                     <div className="control">
@@ -184,7 +184,7 @@ const SignUpForm = (prop) => {
                     </div>
                     {errors.firstName && <p className="help is-danger">{errors.firstName}</p>}
                   </div>
-  
+
                   <div className="field">
                     <label className="label" htmlFor="lastName">Last Name</label>
                     <div className="control">
@@ -200,7 +200,7 @@ const SignUpForm = (prop) => {
                     </div>
                     {errors.lastName && <p className="help is-danger">{errors.lastName}</p>}
                   </div>
-  
+
                   <div className="field">
                     <label className="label" htmlFor="CPR">CPR</label>
                     <div className="control">
@@ -216,7 +216,7 @@ const SignUpForm = (prop) => {
                     </div>
                     {errors.CPR && <p className="help is-danger">{errors.CPR}</p>}
                   </div>
-  
+
                   <div className="field">
                     <label className="label" htmlFor="gender">Gender</label>
                     <div className="control">
@@ -235,19 +235,19 @@ const SignUpForm = (prop) => {
                     </div>
                     {errors.gender && <p className="help is-danger">{errors.gender}</p>}
                   </div>
-  
+
                   <div className="field">
                     <label className="label" htmlFor="DOB">Date of Birth</label>
                     <div className="control">
-                        <input
-                          type="date"
-                          name="DOB"
-                          id="DOB"
-                          className={`input ${errors.DOB ? "is-danger" : ""}`}
-                          value={DOB}
-                          onChange={handleChange}
-                          max={new Date().toISOString().split('T')[0]} 
-                          />
+                      <input
+                        type="date"
+                        name="DOB"
+                        id="DOB"
+                        className={`input ${errors.DOB ? "is-danger" : ""}`}
+                        value={DOB}
+                        onChange={handleChange}
+                        max={new Date().toISOString().split('T')[0]}
+                      />
                     </div>
                     {errors.DOB && <p className="help is-danger">{errors.DOB}</p>}
                   </div>
@@ -267,11 +267,11 @@ const SignUpForm = (prop) => {
                     </div>
                     {errors.contactNumber && <p className="help is-danger">{errors.contactNumber}</p>}
                   </div>
-  
+
                   <div className="field">
                     <button type="submit" className="button is-fullwidth is-white">Sign Up</button>
                   </div>
-  
+
                   <div className="field">
                     <button type="button" className="button is-link is-fullwidth" onClick={() => navigate("/")}>Back</button>
                   </div>
@@ -283,6 +283,6 @@ const SignUpForm = (prop) => {
       </div>
     </div>
   );
-}  
+}
 
 export default SignUpForm;

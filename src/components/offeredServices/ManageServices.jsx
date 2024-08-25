@@ -39,7 +39,7 @@ const ManageServices = ({ user }) => {
                 <Link to="/services/create">
                   <button className="button custom-button ">Service +</button>
                 </Link>
-              ) : <div className="button custom-button">Services</div>}
+              ) : <div className=" custom-button">Services</div>}
             </div>
           </div>
         </div>

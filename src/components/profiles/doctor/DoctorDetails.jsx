@@ -68,8 +68,7 @@ const DoctorDetails = ({ handleDeleteUser, user }) => {
           <Link to={`/users/doctors/${id}/edit`}>
             <button className="button is-primary">Edit</button>
           </Link>
-
-          {!user.type.hasOwnProperty(2000) && (
+          {(user.type && (user.type[5000] === id || user.type.hasOwnProperty(2000))) ? (
             <button
               className="button is-danger"
               type="button"
@@ -77,7 +76,8 @@ const DoctorDetails = ({ handleDeleteUser, user }) => {
             >
               Delete
             </button>
-          )}
+          ) : <></>}
+
         </div>
       </div>
     </div>

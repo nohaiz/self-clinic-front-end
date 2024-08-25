@@ -26,7 +26,6 @@ const signup = async (formData) => {
       body: JSON.stringify(formData),
     });
     const json = await res.json();
-    console.log(json)
     if (json.err) {
       throw new Error(json.err);
     }
